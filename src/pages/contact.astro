@@ -9,6 +9,16 @@ import Footer from '../components/Footer.astro';
   description="Get in touch with DAIRIA Law. We respond within 24 hours. Office near Champs-Elysees, Paris. French and English spoken, with AI support in 12+ languages."
   canonicalPath="/contact"
 >
+  <!-- Breadcrumb JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dairia-law.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://dairia-law.com/contact" }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="bg-[#1D627A] text-white py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

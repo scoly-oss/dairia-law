@@ -62,6 +62,52 @@ const languagePages = [
   description="Expert French employment law counsel for international employers. AI-powered legal assistance, multilingual support. Based in Paris."
   canonicalPath="/"
 >
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://dairia-law.com/#organization",
+        "name": "DAIRIA Law / DAIRIA Avocats",
+        "url": "https://dairia-law.com",
+        "logo": "https://dairia-law.com/favicon.svg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "7 rue Marbeuf",
+          "addressLocality": "Paris",
+          "postalCode": "75008",
+          "addressCountry": "FR"
+        },
+        "telephone": "+33672422486",
+        "email": "s.coly@dairia-avocats.com",
+        "sameAs": [
+          "https://dairia-avocats.com",
+          "https://www.linkedin.com/company/dairia-avocats"
+        ]
+      },
+      {
+        "@type": "LegalService",
+        "@id": "https://dairia-law.com/#legalservice",
+        "name": "DAIRIA Law / DAIRIA Avocats",
+        "url": "https://dairia-law.com",
+        "description": "Expert French employment law counsel for international employers. AI-powered legal assistance, multilingual support. Based in Paris.",
+        "provider": { "@id": "https://dairia-law.com/#organization" },
+        "areaServed": ["FR", "EU", "US", "CN", "JP", "DE", "ES", "IT"],
+        "serviceType": "French Employment Law",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "7 rue Marbeuf",
+          "addressLocality": "Paris",
+          "postalCode": "75008",
+          "addressCountry": "FR"
+        },
+        "telephone": "+33672422486",
+        "email": "s.coly@dairia-avocats.com"
+      }
+    ]
+  })} />
+
   <!-- ========== HERO ========== -->
   <section class="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-dark">
     <!-- Decorative elements -->

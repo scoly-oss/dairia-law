@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   lang?: string;
   canonicalPath?: string;
+  ogImage?: string;
 }
 
 const {
@@ -15,9 +16,34 @@ const {
   description = 'DAIRIA Law — International French employment law firm. Expert legal counsel for international employers operating in France. Powered by AI.',
   lang = 'en',
   canonicalPath = '',
+  ogImage = '/og-default.jpg',
 } = Astro.props;
 
+const siteUrl = 'https://dairia-law.com';
 const canonicalURL = new URL(canonicalPath, Astro.site);
+const ogImageURL = new URL(ogImage, siteUrl).href;
+
+// hreflang mapping
+const langMap: Record<string, string> = {
+  en: '/',
+  de: '/de',
+  zh: '/zh',
+  ja: '/ja',
+  es: '/es',
+  it: '/it',
+};
+
+// Determine OG locale
+const localeMap: Record<string, string> = {
+  en: 'en_US',
+  de: 'de_DE',
+  zh: 'zh_CN',
+  ja: 'ja_JP',
+  es: 'es_ES',
+  it: 'it_IT',
+  fr: 'fr_FR',
+};
+const ogLocale = localeMap[lang] || 'en_US';
 ---
 
 <!doctype html>
@@ -38,12 +64,21 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:site_name" content="DAIRIA Law" />
-    <meta property="og:locale" content={lang === 'en' ? 'en_US' : lang} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:image" content={ogImageURL} />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- hreflang: language alternatives -->
+    {Object.entries(langMap).map(([hrefLang, path]) => (
+      <link rel="alternate" hreflang={hrefLang} href={`${siteUrl}${path}`} />
+    ))}
+    <link rel="alternate" hreflang="fr" href="https://dairia-avocats.com" />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

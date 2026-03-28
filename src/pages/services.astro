@@ -9,6 +9,16 @@ import Footer from '../components/Footer.astro';
   description="Comprehensive French employment law services for international employers. Contracts, termination, M&A due diligence, compliance, collective relations, and social security."
   canonicalPath="/services"
 >
+  <!-- Breadcrumb JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dairia-law.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://dairia-law.com/services" }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="bg-[#1D627A] text-white py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

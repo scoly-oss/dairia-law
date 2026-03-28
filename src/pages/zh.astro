@@ -11,6 +11,16 @@ import Footer from '../components/Footer.astro';
   canonicalPath="/zh"
 >
 
+  <!-- Breadcrumb JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dairia-law.com/" },
+      { "@type": "ListItem", "position": 2, "name": "中文", "item": "https://dairia-law.com/zh" }
+    ]
+  })} />
+
   <!-- 首页横幅 -->
   <section class="relative bg-gradient-to-br from-dark via-primary to-primary text-white section-padding">
     <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>

@@ -9,6 +9,72 @@ import Footer from '../components/Footer.astro';
   description="DAIRIA AI delivers instant, sourced answers to French employment law questions in 12+ languages. Built for HR teams and in-house counsel worldwide."
   canonicalPath="/dairia-ai"
 >
+  <!-- Breadcrumb JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dairia-law.com/" },
+      { "@type": "ListItem", "position": 2, "name": "DAIRIA AI", "item": "https://dairia-law.com/dairia-ai" }
+    ]
+  })} />
+
+  <!-- FAQ JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is DAIRIA AI a replacement for a lawyer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DAIRIA AI is designed to complement, not replace, legal counsel. It provides instant, sourced answers in your language to routine French employment law questions, freeing up your team. When you need deeper legal support — contracts, disputes, restructuring — our English-speaking lawyers at DAIRIA Avocats handle your case personally."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate are the answers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DAIRIA AI is built and supervised by French employment lawyers. Every answer cites its legal sources -- Code du travail articles, Cour de cassation decisions, and collective agreement provisions -- so you can verify independently. Our legal team continuously reviews and improves the system's accuracy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data secure and confidential?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. DAIRIA AI runs on AWS infrastructure in Paris, France. All data is encrypted with AES-256 at rest and TLS 1.3 in transit. We are fully GDPR compliant. Your queries and documents are never shared with third parties or used to train models for other clients."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can DAIRIA AI handle my specific collective agreement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. DAIRIA AI already covers hundreds of French collective bargaining agreements (conventions collectives). Additionally, with the custom training feature, you can upload your specific company-level agreements, internal policies, and HR procedures so that answers reflect your exact context."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly is new legislation integrated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "New laws, decrees, and significant Cour de cassation decisions are integrated within 48 hours of publication. Our legal team monitors the Journal Officiel and legal databases daily to ensure DAIRIA AI always reflects the current state of French employment law."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What languages does DAIRIA AI support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DAIRIA AI supports 12+ languages including English, French, German, Mandarin, Japanese, Spanish, Italian, Arabic, Portuguese, Korean, Hindi, and Russian. You can ask your question in any supported language and receive a fully sourced answer in that same language."
+        }
+      }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="relative bg-[#1D627A] text-white py-20 lg:py-28 overflow-hidden">
     <div class="absolute inset-0 opacity-10">
