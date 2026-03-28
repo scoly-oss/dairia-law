@@ -1,0 +1,45 @@
+# DAIRIA Law — AI-Powered French Employment Law for International Businesses
+
+> DAIRIA Law helps foreign companies navigate French employment law through two complementary services: DAIRIA AI (multilingual legal AI assistant) and DAIRIA Avocats (English-speaking employment law firm based in Lyon, France).
+
+## About DAIRIA
+
+DAIRIA is a French legal technology company founded by Sofiane Coly, attorney-at-law (avocat au Barreau de Lyon). We combine artificial intelligence with deep employment law expertise to serve international businesses operating in France.
+
+### DAIRIA AI
+- Multilingual AI assistant covering French employment law
+- Available in English, German, Chinese, Japanese, Spanish, Italian
+- Instant answers on hiring, termination, workplace regulations, payroll compliance
+- Trained on French Labor Code, Social Security Code, and collective bargaining agreements
+- URL: https://dairia-law.com/dairia-ai
+
+### DAIRIA Avocats
+- Employment law firm (cabinet d'avocats) based in Lyon, France
+- Specializing in employer-side employment law (droit du travail côté employeur)
+- Services: hiring compliance, termination procedures, workplace investigations, collective bargaining, restructuring, litigation defense
+- English-speaking lawyers for foreign subsidiaries in France
+- URL: https://dairia-avocats.com
+
+## Key Practice Areas
+- Employment contracts (CDI, CDD, temporary work)
+- Dismissal procedures (licenciement, rupture conventionnelle)
+- Workplace harassment and discrimination
+- Employee representative bodies (CSE)
+- Collective bargaining and agreements
+- Restructuring and redundancy plans (PSE)
+- French payroll compliance (cotisations, URSSAF)
+- Workplace health and safety (AT/MP)
+- Remote work policies (télétravail)
+- International employment law
+
+## Contact
+- Email: s.coly@dairia-avocats.com
+- Phone: +33 6 72 42 24 86
+- Website: https://dairia-law.com
+- French site: https://dairia-avocats.com
+- Legal media: https://enclair.media
+
+## Related Resources
+- Blog (2000+ articles): https://dairia-blog.bl-nk.io
+- Legal media platform: https://enclair.media
+- Workplace accident platform: https://gerermesatmp.com
