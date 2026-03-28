@@ -1,0 +1,152 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const WP_API = 'https://dairia-blog.bl-nk.io/wp-json/wp/v2/posts?_embed=true&per_page=100&categories=1001';
+
+  let posts: any[] = [];
+
+  try {
+    const res = await fetch(WP_API);
+    if (res.ok) {
+      posts = await res.json();
+    }
+  } catch (e) {
+    // If API fails at build time, return empty paths
+  }
+
+  return posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface WPPost {
+  id: number;
+  slug: string;
+  title: { rendered: string };
+  excerpt: { rendered: string };
+  content: { rendered: string };
+  date: string;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
+}
+
+const { post } = Astro.props as { post: WPPost };
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '').trim();
+}
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+const featuredImage = post._embedded?.['wp:featuredmedia']?.[0];
+const metaDescription = stripHtml(post.excerpt.rendered).substring(0, 160);
+const pageTitle = stripHtml(post.title.rendered);
+---
+
+<Layout
+  title={`${pageTitle} | DAIRIA Law Insights`}
+  description={metaDescription}
+  lang="en"
+  canonicalPath={`/insights/${post.slug}`}
+>
+  <!-- Article Header -->
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div class="container-narrow relative">
+      <div class="max-w-3xl">
+        <a href="/insights" class="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium mb-6 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+          Back to Insights
+        </a>
+        <time class="block text-accent font-medium text-sm mb-4">{formatDate(post.date)}</time>
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" set:html={post.title.rendered} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Content -->
+  <section class="section-padding">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        {featuredImage && (
+          <div class="rounded-2xl overflow-hidden mb-10 shadow-lg">
+            <img
+              src={featuredImage.source_url}
+              alt={featuredImage.alt_text || pageTitle}
+              class="w-full h-auto"
+            />
+          </div>
+        )}
+
+        <article class="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-dark prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-dark prose-img:rounded-xl" set:html={post.content.rendered} />
+      </div>
+
+      <!-- Back to Insights -->
+      <div class="max-w-3xl mx-auto mt-16 pt-10 border-t border-gray-200">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-lg font-bold text-dark">Related Articles</h3>
+            <p class="text-gray-600 text-sm mt-1">Explore more insights on French employment law.</p>
+          </div>
+          <a href="/insights" class="btn-outline-primary text-sm !px-6 !py-2.5">
+            View All Insights
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
+        Need Personalized Advice?
+      </h2>
+      <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+        Our team of French employment law specialists is ready to help. Schedule a free 30-minute consultation.
+      </p>
+      <a href="/contact" class="btn-primary">
+        Get in Touch
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .prose h2 {
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+  }
+  .prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.8;
+  }
+  .prose ul, .prose ol {
+    margin-bottom: 1.25em;
+    padding-left: 1.5em;
+  }
+  .prose li {
+    margin-bottom: 0.5em;
+  }
+  .prose blockquote {
+    border-left: 4px solid #1D627A;
+    padding-left: 1.5em;
+    font-style: italic;
+    color: #4a5568;
+  }
+</style>

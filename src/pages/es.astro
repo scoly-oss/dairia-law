@@ -1,0 +1,262 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="DAIRIA Law — Su socio en derecho laboral francés"
+  description="Asesoramiento jurídico experto en derecho laboral francés para empresas españolas que invierten en Francia. Contratos, despidos, seguridad social y conformidad."
+  lang="es"
+  canonicalPath="/es"
+>
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div class="container-narrow relative">
+      <div class="max-w-3xl">
+        <span class="inline-block px-4 py-1.5 bg-accent/20 text-accent font-semibold text-sm rounded-full mb-6">
+          Para empresas españolas en Francia
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          Su socio en derecho laboral <span class="text-accent">francés</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
+          Ayudamos a las empresas españolas a navegar por la complejidad del derecho laboral francés. Desde la contratación hasta el despido, le acompañamos en cada etapa de su implantación en Francia.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/contact" class="btn-primary">
+            Solicitar una consulta
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          <a href="#diferencias" class="btn-outline">
+            Descubrir las diferencias
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Differences -->
+  <section id="diferencias" class="section-padding bg-gray-50">
+    <div class="container-narrow">
+      <div class="text-center mb-16">
+        <span class="text-accent font-semibold text-sm uppercase tracking-wider">Comparativa</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mt-3">
+          Diferencias clave: derecho laboral francés vs. español
+        </h2>
+        <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+          El derecho laboral francés presenta diferencias significativas con el español. Conocerlas es esencial antes de contratar en Francia.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- CDI vs Contrato Indefinido -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-dark">CDI vs. Contrato indefinido</h3>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-primary/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-primary uppercase mb-1">Francia</p>
+              <p class="text-sm text-gray-700"><strong>CDI</strong> (Contrat à Durée Indéterminée) con periodo de prueba regulado y protección reforzada contra el despido.</p>
+            </div>
+            <div class="bg-accent/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-accent uppercase mb-1">España</p>
+              <p class="text-sm text-gray-700"><strong>Contrato indefinido</strong> con periodo de prueba flexible y menor coste de despido tras la reforma laboral.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 35h vs 40h -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-dark">35 horas vs. 40 horas</h3>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-primary/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-primary uppercase mb-1">Francia</p>
+              <p class="text-sm text-gray-700">Jornada legal de <strong>35 horas semanales</strong>. Las horas suplementarias están estrictamente reguladas y generan recargos obligatorios.</p>
+            </div>
+            <div class="bg-accent/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-accent uppercase mb-1">España</p>
+              <p class="text-sm text-gray-700">Jornada máxima de <strong>40 horas semanales</strong>. Las horas extraordinarias tienen un límite anual de 80 horas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CSE vs Comité de empresa -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-dark">CSE vs. Comité de empresa</h3>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-primary/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-primary uppercase mb-1">Francia</p>
+              <p class="text-sm text-gray-700"><strong>CSE</strong> (Comité Social et Économique) obligatorio a partir de 11 empleados. Amplios poderes de consulta e información.</p>
+            </div>
+            <div class="bg-accent/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-accent uppercase mb-1">España</p>
+              <p class="text-sm text-gray-700"><strong>Comité de empresa</strong> obligatorio a partir de 50 trabajadores. Delegados de personal desde 10 trabajadores.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Indemnités vs Indemnización -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-lg font-bold text-dark">Indemnités vs. Indemnización</h3>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-primary/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-primary uppercase mb-1">Francia</p>
+              <p class="text-sm text-gray-700"><strong>Indemnité de licenciement</strong>: 1/4 de salario mensual por año de antigüedad. Baremo Macron para daños y perjuicios.</p>
+            </div>
+            <div class="bg-accent/5 rounded-lg p-4">
+              <p class="text-xs font-semibold text-accent uppercase mb-1">España</p>
+              <p class="text-sm text-gray-700"><strong>Indemnización</strong>: 33 días por año trabajado (despido improcedente) o 20 días (despido objetivo). Máximo 24 mensualidades.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section-padding">
+    <div class="container-narrow">
+      <div class="text-center mb-16">
+        <span class="text-accent font-semibold text-sm uppercase tracking-wider">Nuestros servicios</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mt-3">
+          Acompañamiento jurídico integral
+        </h2>
+        <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+          Ofrecemos un servicio completo de asesoría en derecho laboral francés adaptado a las necesidades de las empresas españolas.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary/20 transition-all group">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          </div>
+          <h3 class="text-lg font-bold text-dark mb-2">Contratos de trabajo</h3>
+          <p class="text-sm text-gray-600">Redacción y revisión de contratos CDI, CDD y cláusulas específicas conforme al derecho francés.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary/20 transition-all group">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
+          </div>
+          <h3 class="text-lg font-bold text-dark mb-2">Despidos</h3>
+          <p class="text-sm text-gray-600">Gestión de despidos individuales y colectivos, ruptura convencional y procedimientos disciplinarios.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary/20 transition-all group">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+          </div>
+          <h3 class="text-lg font-bold text-dark mb-2">Seguridad social</h3>
+          <p class="text-sm text-gray-600">Afiliación, cotizaciones, convenios bilaterales España-Francia y desplazamiento de trabajadores.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary/20 transition-all group">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+          </div>
+          <h3 class="text-lg font-bold text-dark mb-2">Conformidad</h3>
+          <p class="text-sm text-gray-600">Auditoría laboral, reglamento interno, registro de personal y obligaciones legales del empleador en Francia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAIRIA AI -->
+  <section class="section-padding bg-gradient-to-br from-dark to-primary text-white">
+    <div class="container-narrow">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block px-4 py-1.5 bg-accent/20 text-accent font-semibold text-sm rounded-full mb-6">
+            Inteligencia artificial
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            DAIRIA AI <span class="text-accent">habla español</span>
+          </h2>
+          <p class="text-white/80 text-lg mb-6 leading-relaxed">
+            Nuestro asistente de inteligencia artificial está entrenado en derecho laboral francés y responde a sus preguntas en español, 24 horas al día, 7 días a la semana.
+          </p>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              <span class="text-white/80">Respuestas instantáneas sobre el Código del Trabajo francés</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              <span class="text-white/80">Análisis de convenios colectivos y jurisprudencia</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              <span class="text-white/80">Interfaz completamente en español</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              <span class="text-white/80">Disponible 24/7 para sus equipos jurídicos y de RRHH</span>
+            </li>
+          </ul>
+          <div class="flex items-baseline gap-3 mb-8">
+            <span class="text-4xl font-bold text-white">90 &euro;</span>
+            <span class="text-white/60">HT / mes</span>
+          </div>
+          <a href="/dairia-ai" class="btn-primary">
+            Descubrir DAIRIA AI
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+          <div class="space-y-4">
+            <div class="bg-white/10 rounded-xl p-4">
+              <p class="text-sm text-white/60 mb-1">Usted pregunta:</p>
+              <p class="text-white">&laquo; &iquest;Cuál es el procedimiento para despedir a un empleado en Francia? &raquo;</p>
+            </div>
+            <div class="bg-accent/20 rounded-xl p-4">
+              <p class="text-sm text-accent mb-1">DAIRIA AI responde:</p>
+              <p class="text-white/90 text-sm">El despido en Francia requiere un procedimiento estricto en tres etapas: convocatoria a una entrevista previa (carta certificada con acuse de recibo), entrevista previa con un plazo mínimo de 5 días laborables, y notificación motivada del despido con plazos específicos según el motivo...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
+        &iquest;Su empresa española se implanta en Francia?
+      </h2>
+      <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+        Contacte con nuestro equipo de abogados especializados. Primera consulta gratuita de 30 minutos.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn-primary">
+          Solicitar una consulta gratuita
+        </a>
+        <a href="/services" class="btn-outline-primary">
+          Ver todos nuestros servicios
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

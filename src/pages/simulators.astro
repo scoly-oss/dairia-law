@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const simulators = [
+  {
+    title: 'Severance Pay Calculator',
+    description: 'Estimate legal and conventional severance pay (indemnité de licenciement) based on salary, seniority, and applicable collective bargaining agreement.',
+    icon: 'calculator',
+    href: '/simulators/severance-pay',
+    color: 'primary',
+  },
+  {
+    title: 'Litigation Cost Estimator',
+    description: 'Assess potential employment tribunal (Conseil de prud\'hommes) costs including the Macron scale indemnities, legal fees, and procedural expenses.',
+    icon: 'scale',
+    href: '/simulators/litigation-cost',
+    color: 'accent',
+  },
+  {
+    title: 'Hiring Cost Calculator',
+    description: 'Calculate the full employer cost of hiring in France, including gross-to-net salary, social charges (cotisations patronales), and mandatory contributions.',
+    icon: 'users',
+    href: '/simulators/hiring-cost',
+    color: 'primary',
+  },
+  {
+    title: 'Mutual Termination Calculator',
+    description: 'Estimate the rupture conventionnelle indemnity — the negotiated mutual termination payment required under French law, with minimum legal thresholds.',
+    icon: 'handshake',
+    href: '/simulators/mutual-termination',
+    color: 'accent',
+  },
+];
+---
+
+<Layout
+  title="Free Employment Law Calculators | DAIRIA Law"
+  description="Free French employment law calculators: severance pay, litigation costs, hiring costs, and mutual termination indemnity. Get instant estimates for your workforce planning."
+  lang="en"
+  canonicalPath="/simulators"
+>
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div class="container-narrow relative">
+      <div class="max-w-3xl">
+        <span class="inline-block px-4 py-1.5 bg-accent/20 text-accent font-semibold text-sm rounded-full mb-6">
+          Free Tools
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          Free Employment Law <span class="text-accent">Calculators</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/80 max-w-2xl leading-relaxed">
+          Plan your workforce costs in France with our suite of free calculators. Get instant estimates for severance, hiring costs, litigation exposure, and more.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulators Grid -->
+  <section class="section-padding">
+    <div class="container-narrow">
+      <div class="grid sm:grid-cols-2 gap-8">
+        {simulators.map((sim) => (
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all group">
+            <div class="p-8">
+              <div class={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${sim.color === 'accent' ? 'bg-accent/10' : 'bg-primary/10'}`}>
+                {sim.icon === 'calculator' && (
+                  <svg class={`w-7 h-7 ${sim.color === 'accent' ? 'text-accent' : 'text-primary'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                )}
+                {sim.icon === 'scale' && (
+                  <svg class={`w-7 h-7 ${sim.color === 'accent' ? 'text-accent' : 'text-primary'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+                )}
+                {sim.icon === 'users' && (
+                  <svg class={`w-7 h-7 ${sim.color === 'accent' ? 'text-accent' : 'text-primary'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                )}
+                {sim.icon === 'handshake' && (
+                  <svg class={`w-7 h-7 ${sim.color === 'accent' ? 'text-accent' : 'text-primary'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>
+                )}
+              </div>
+              <h3 class="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors">{sim.title}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6">{sim.description}</p>
+              <a
+                href={sim.href}
+                class={`inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm rounded-lg transition-all duration-200 ${sim.color === 'accent' ? 'bg-accent text-white hover:bg-orange-600 shadow-sm hover:shadow-md' : 'bg-primary text-white hover:bg-primary/90 shadow-sm hover:shadow-md'}`}
+              >
+                Launch Calculator
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="mt-12 bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          <div>
+            <h4 class="font-bold text-amber-800 mb-1">Disclaimer</h4>
+            <p class="text-sm text-amber-700 leading-relaxed">
+              These calculators provide estimates only and are intended for informational purposes. Results may vary depending on the applicable collective bargaining agreement, individual circumstances, and recent legislative changes. For personalized legal advice tailored to your specific situation, please <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
+        Need a Detailed Analysis?
+      </h2>
+      <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+        Our calculators give you a starting point. For a comprehensive assessment, speak with one of our French employment law specialists.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn-primary">
+          Schedule a Consultation
+        </a>
+        <a href="/dairia-ai" class="btn-outline-primary">
+          Try DAIRIA AI
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

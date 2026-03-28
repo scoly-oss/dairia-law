@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="您的法国劳动法合作伙伴 | DAIRIA Law"
+  description="DAIRIA Law 为中国企业提供法国劳动法全方位法律服务。AI赋能，中文母语服务。"
+  lang="zh"
+  canonicalPath="/zh"
+>
+
+  <!-- 首页横幅 -->
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary text-white section-padding">
+    <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+    <div class="container-narrow relative">
+      <div class="max-w-3xl">
+        <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-4">DAIRIA Law -- 巴黎律师事务所</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
+          您的法国劳动法合作伙伴
+        </h1>
+        <p class="text-lg sm:text-xl text-white/80 leading-relaxed mb-10">
+          您的企业正在法国投资或设立子公司？DAIRIA Law 是您在法国劳动法领域的可靠伙伴。我们深谙中法商业文化差异，为中国企业提供从雇佣合同到劳动争议的全方位法律支持。
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#联系我们" class="btn-primary">预约咨询</a>
+          <a href="#服务内容" class="btn-outline">了解我们的服务</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 为什么需要法国劳动法律师 -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-dark mb-4">
+          为什么中国企业需要法国劳动法专家
+        </h2>
+        <p class="text-lg text-dark/60">
+          法国劳动法与中国劳动法存在根本性差异。以下是您在法国经营必须了解的关键区别。
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">1</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">无固定期限合同 (CDI) 为常态</h3>
+          <p class="text-dark/60 leading-relaxed">
+            在法国，无固定期限劳动合同 (CDI) 是默认的雇佣形式，而非中国常见的固定期限合同。CDI 意味着雇主无法在合同到期时自然终止劳动关系，解雇员工必须有法定正当理由并遵循严格程序。
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">2</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">高额社会保险缴费</h3>
+          <p class="text-dark/60 leading-relaxed">
+            法国雇主的社会保险缴费比例超过工资总额的45%（charges patronales），远高于中国的社保比例。这包括医疗保险、养老保险、失业保险、工伤保险等多个项目，对企业用工成本影响重大。
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">3</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">员工代表机构 (CSE) 强制设立</h3>
+          <p class="text-dark/60 leading-relaxed">
+            企业员工人数达到11人时，必须依法设立社会经济委员会 (CSE)。CSE 拥有广泛的知情权和协商权，在企业重大决策中发挥重要作用。这与中国企业的工会制度有本质区别。
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">4</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">每年五周带薪年假</h3>
+          <p class="text-dark/60 leading-relaxed">
+            法国法律规定员工每年享有至少五周（25个工作日）的带薪年假，远多于中国的法定年假天数。此外还有RTT（工时补偿假）等额外休假制度，企业必须妥善管理休假安排。
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">5</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">35小时工作制</h3>
+          <p class="text-dark/60 leading-relaxed">
+            法国法定每周工作时间为35小时，加班受到严格限制并需支付加班费。这与中国的标准工时制度和加班文化存在显著差异，企业必须严格遵守相关规定以避免法律风险。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 服务内容 -->
+  <section id="服务内容" class="section-padding bg-gray-50">
+    <div class="container-narrow">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-dark mb-4">
+          面向中国企业的专业服务
+        </h2>
+        <p class="text-lg text-dark/60">
+          从企业设立到日常管理，我们为您的法国业务提供全方位劳动法支持。
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">子公司设立与雇佣合规</h3>
+          <p class="text-dark/60 leading-relaxed">
+            协助中国企业在法国设立子公司时建立合规的劳动用工体系，起草符合法国法律的劳动合同（CDI/CDD），设计薪酬福利方案，确保符合适用的行业集体协议（convention collective）。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">工作许可与员工派遣</h3>
+          <p class="text-dark/60 leading-relaxed">
+            为中国籍员工办理法国工作许可和居留许可提供法律指导，协助处理中国员工派驻法国的相关手续，确保符合法国移民法和欧盟相关规定，保障企业国际人才流动的合规性。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.25-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">解雇程序与劳动争议</h3>
+          <p class="text-dark/60 leading-relaxed">
+            指导企业依法进行解雇程序（个人原因解雇、经济性裁员），协助协商解除劳动合同（rupture conventionnelle），在劳动仲裁庭（Conseil de Prud'hommes）代理企业进行诉讼，最大限度降低法律风险。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">跨文化管理与合规咨询</h3>
+          <p class="text-dark/60 leading-relaxed">
+            提供中法商业文化差异培训，协助制定符合法国法律的内部规章制度（règlement intérieur），处理员工关系问题，帮助中国管理层理解法国职场文化中关于工作与生活平衡的重要性。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DAIRIA AI -->
+  <section id="ai" class="section-padding bg-dark text-white">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-4">DAIRIA AI</p>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold mb-6">
+            您的智能法律助手 -- 中文母语服务
+          </h2>
+          <p class="text-white/70 text-lg leading-relaxed mb-6">
+            DAIRIA AI 是我们自主研发的人工智能法律助手，专注于法国劳动法领域。它能够以流利的中文为您解答法国劳动法问题，帮助您跨越语言和法律的双重壁垒。
+          </p>
+          <ul class="space-y-4 text-white/70">
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>中文即时解答法国劳动法问题，全天候在线</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>基于最新法国劳动法典和司法判例数据库</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>自动对比中法法律差异，提供针对性建议</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>数据安全存储于欧洲服务器，符合GDPR标准</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 lg:p-10">
+          <div class="text-center">
+            <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-2">DAIRIA AI</p>
+            <p class="text-4xl font-display font-bold text-white mb-1">90 EUR <span class="text-lg font-sans font-normal text-white/50">（不含税）/月</span></p>
+            <p class="text-white/50 text-sm mb-8">每用户，无长期合约约束</p>
+            <ul class="text-left space-y-3 text-white/70 text-sm mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                无限次使用
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                中文母语级别交互
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                实时更新的法国劳动法数据
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                数据存储于欧洲（AWS 巴黎区域）
+              </li>
+            </ul>
+            <a href="#联系我们" class="btn-primary w-full">立即试用</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关键数据 -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-dark mb-4">DAIRIA 关键数据</h2>
+        <p class="text-lg text-dark/60">法律专业与人工智能技术的深度融合。</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div class="bg-gray-50 rounded-xl p-8">
+          <p class="text-4xl lg:text-5xl font-display font-bold text-primary mb-2">15+</p>
+          <p class="text-dark/60 font-medium">年法国劳动法执业经验</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-8">
+          <p class="text-4xl lg:text-5xl font-display font-bold text-primary mb-2">500+</p>
+          <p class="text-dark/60 font-medium">服务企业客户，包括众多国际企业</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-8">
+          <p class="text-4xl lg:text-5xl font-display font-bold text-accent mb-2">AI</p>
+          <p class="text-dark/60 font-medium">首家提供中文AI法律助手的法国劳动法律所</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我们 -->
+  <section id="联系我们" class="section-padding bg-gradient-to-br from-primary to-dark text-white">
+    <div class="container-narrow text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold mb-6">
+        让我们讨论您在法国的项目
+      </h2>
+      <p class="text-white/70 text-lg mb-10 leading-relaxed">
+        无论您是计划在法国设立子公司、招聘员工，还是需要处理劳动争议，我们理解中法商业文化差异的团队随时为您服务。欢迎预约免费初次咨询。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:contact@dairia-law.com" class="btn-primary">
+          联系我们
+        </a>
+        <a href="tel:+33100000000" class="btn-outline">
+          电话咨询
+        </a>
+      </div>
+      <p class="mt-8 text-white/40 text-sm">我们将在24小时内回复。可提供中文服务。</p>
+    </div>
+  </section>
+
+</Layout>

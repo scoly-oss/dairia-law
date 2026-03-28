@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Ihr Anwalt für französisches Arbeitsrecht | DAIRIA Law"
+  description="DAIRIA Law begleitet deutsche Unternehmen bei allen arbeitsrechtlichen Fragen in Frankreich. KI-gestützte Rechtsberatung auf Deutsch."
+  lang="de"
+  canonicalPath="/de"
+>
+
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary text-white section-padding">
+    <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+    <div class="container-narrow relative">
+      <div class="max-w-3xl">
+        <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-4">DAIRIA Law -- Ihre Kanzlei in Paris</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
+          Ihr Anwalt für französisches Arbeitsrecht
+        </h1>
+        <p class="text-lg sm:text-xl text-white/80 leading-relaxed mb-10">
+          Sie sind ein deutsches Unternehmen mit einer Niederlassung in Frankreich? DAIRIA Law begleitet Sie umfassend im französischen Arbeitsrecht -- von der Einstellung bis zur Kündigung, von der Betriebsratseinrichtung bis zur Entsendung von Arbeitnehmern.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#kontakt" class="btn-primary">Beratungsgespräch vereinbaren</a>
+          <a href="#leistungen" class="btn-outline">Unsere Leistungen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warum Sie einen französischen Arbeitsrechtler brauchen -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-dark mb-4">
+          Warum Sie einen Spezialisten für französisches Arbeitsrecht benötigen
+        </h2>
+        <p class="text-lg text-dark/60">
+          Das französische Arbeitsrecht unterscheidet sich grundlegend vom deutschen. Hier sind die wichtigsten Unterschiede, die Sie kennen müssen.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">1</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">Kein &laquo;At-Will&raquo;-Kündigungsrecht</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Anders als in vielen Rechtsordnungen ist eine Kündigung in Frankreich nur aus einem &laquo;cause réelle et sérieuse&raquo; (triftiger und ernsthafter Grund) zulässig. Das Verfahren ist streng formalisiert und wesentlich komplexer als der deutsche Kündigungsschutz nach dem KSchG.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">2</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">35-Stunden-Woche als gesetzliche Norm</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Frankreich hat eine gesetzliche Wochenarbeitszeit von 35 Stunden. Überstunden unterliegen strengen Regelungen mit Zuschlägen. Das unterscheidet sich erheblich von der deutschen Praxis mit tarifvertraglichen Arbeitszeitregelungen.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">3</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">CSE statt Betriebsrat</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Ab 11 Mitarbeitern ist die Einrichtung eines CSE (Comité Social et Économique) Pflicht. Der CSE hat andere Befugnisse als der deutsche Betriebsrat, insbesondere bei der Mitbestimmung, und das Wahlverfahren folgt eigenen Regeln.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">4</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">Komplexes Kündigungsverfahren</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Jede Kündigung erfordert ein Vorgespräch (entretien préalable), Einhaltung strenger Fristen und eine ausführliche schriftliche Begründung. Formfehler können zu erheblichen Schadensersatzansprüchen führen -- weit über das hinaus, was in Deutschland üblich ist.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5">
+            <span class="text-primary font-bold text-lg">5</span>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">Entsendung nach Frankreich</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Die Entsendung deutscher Arbeitnehmer nach Frankreich (détachement) unterliegt strengen EU- und französischen Vorschriften. Meldepflichten, Mindestlohn, Arbeitszeitregelungen und die Benennung eines Vertreters in Frankreich müssen eingehalten werden.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Unsere Leistungen -->
+  <section id="leistungen" class="section-padding bg-gray-50">
+    <div class="container-narrow">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-dark mb-4">
+          Unsere Leistungen für deutsche Unternehmen
+        </h2>
+        <p class="text-lg text-dark/60">
+          Maßgeschneiderte arbeitsrechtliche Beratung für Ihr Frankreich-Geschäft.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">Arbeitsverträge und Einstellungen</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Erstellung und Prüfung französischer Arbeitsverträge (CDI, CDD), Gestaltung von Vergütungspaketen unter Berücksichtigung der hohen Sozialabgaben (über 45 % Arbeitgeberanteil), Beratung zu Probezeiten und Wettbewerbsverboten.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">Betriebsverfassung und CSE</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Beratung zur Einrichtung und Verwaltung des CSE (Comité Social et Économique), Begleitung bei Wahlen, Verhandlung von Betriebsvereinbarungen und Umgang mit der französischen Arbeitnehmervertretung -- mit Verständnis für die deutsche Mitbestimmungskultur.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.25-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">Kündigungen und Rechtsstreitigkeiten</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Begleitung bei individuellen und betriebsbedingten Kündigungen, Aufhebungsverträge (rupture conventionnelle), Vertretung vor dem Arbeitsgericht (Conseil de Prud'hommes) und Verhandlung von Abfindungen.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-dark mb-3">Entsendung und internationaler Einsatz</h3>
+          <p class="text-dark/60 leading-relaxed">
+            Beratung zur Entsendung deutscher Mitarbeiter nach Frankreich (détachement), Einhaltung der EU-Entsenderichtlinie, Meldepflichten bei der Inspection du travail, Arbeitserlaubnisse für Drittstaatsangehörige und grenzüberschreitende Sozialversicherungsfragen.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DAIRIA AI -->
+  <section id="ki" class="section-padding bg-dark text-white">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-4">DAIRIA AI</p>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold mb-6">
+            Ihre KI-gestützte Rechtsassistenz -- auf Deutsch
+          </h2>
+          <p class="text-white/70 text-lg leading-relaxed mb-6">
+            DAIRIA AI ist unsere proprietäre künstliche Intelligenz, spezialisiert auf französisches Arbeitsrecht. Sie spricht fließend Deutsch und ermöglicht Ihnen den direkten Zugang zu arbeitsrechtlichem Fachwissen -- in Ihrer Sprache, rund um die Uhr.
+          </p>
+          <ul class="space-y-4 text-white/70">
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>Sofortige Antworten auf arbeitsrechtliche Fragen in deutscher Sprache</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>Basierend auf dem aktuellen französischen Code du travail und der Rechtsprechung</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>Erklärungen, die die Unterschiede zum deutschen Recht berücksichtigen</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+              <span>Vertraulich und sicher -- Ihre Daten werden in Europa gehostet</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 lg:p-10">
+          <div class="text-center">
+            <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-2">DAIRIA AI</p>
+            <p class="text-4xl font-display font-bold text-white mb-1">90 EUR <span class="text-lg font-sans font-normal text-white/50">HT/Monat</span></p>
+            <p class="text-white/50 text-sm mb-8">Pro Nutzer, ohne Verpflichtung</p>
+            <ul class="text-left space-y-3 text-white/70 text-sm mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                Unbegrenzter Zugang
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                Muttersprachliches Deutsch
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                Aktuelles französisches Arbeitsrecht
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                Datenhosting in Europa (AWS Paris)
+              </li>
+            </ul>
+            <a href="#kontakt" class="btn-primary w-full">Jetzt testen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kennzahlen -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-dark mb-4">DAIRIA in Zahlen</h2>
+        <p class="text-lg text-dark/60">Eine bewährte Kanzlei an der Schnittstelle von Recht und Technologie.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div class="bg-gray-50 rounded-xl p-8">
+          <p class="text-4xl lg:text-5xl font-display font-bold text-primary mb-2">15+</p>
+          <p class="text-dark/60 font-medium">Jahre Erfahrung im französischen Arbeitsrecht</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-8">
+          <p class="text-4xl lg:text-5xl font-display font-bold text-primary mb-2">500+</p>
+          <p class="text-dark/60 font-medium">Betreute Unternehmen, darunter zahlreiche deutsche Firmen</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-8">
+          <p class="text-4xl lg:text-5xl font-display font-bold text-accent mb-2">KI</p>
+          <p class="text-dark/60 font-medium">Erste Kanzlei mit KI-gestützter Rechtsberatung auf Deutsch</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt CTA -->
+  <section id="kontakt" class="section-padding bg-gradient-to-br from-primary to-dark text-white">
+    <div class="container-narrow text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold mb-6">
+        Lassen Sie uns über Ihr Frankreich-Projekt sprechen
+      </h2>
+      <p class="text-white/70 text-lg mb-10 leading-relaxed">
+        Ob Sie eine Niederlassung gründen, Mitarbeiter einstellen oder ein arbeitsrechtliches Problem lösen müssen -- unser deutsch-französisches Team steht Ihnen zur Verfügung. Vereinbaren Sie ein unverbindliches Erstgespräch.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:contact@dairia-law.com" class="btn-primary">
+          Kontakt aufnehmen
+        </a>
+        <a href="tel:+33100000000" class="btn-outline">
+          Jetzt anrufen
+        </a>
+      </div>
+      <p class="mt-8 text-white/40 text-sm">Wir antworten innerhalb von 24 Stunden. Erstgespräch auf Deutsch möglich.</p>
+    </div>
+  </section>
+
+</Layout>

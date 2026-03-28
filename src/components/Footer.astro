@@ -1,0 +1,146 @@
+---
+const serviceLinks = [
+  { href: '/services/employment-law-advisory', label: 'Employment Law Advisory' },
+  { href: '/services/restructuring', label: 'Restructuring & Redundancies' },
+  { href: '/services/ma-due-diligence', label: 'M&A Labour Due Diligence' },
+  { href: '/services/compliance', label: 'Compliance & Investigations' },
+];
+
+const companyLinks = [
+  { href: '/about', label: 'About Us' },
+  { href: '/insights', label: 'Insights' },
+  { href: '/simulators', label: 'Simulators' },
+  { href: '/dairia-ai', label: 'DAIRIA AI' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const partnerSites = [
+  { href: 'https://dairia-avocats.com', label: 'dairia-avocats.com' },
+  { href: 'https://dairia.ai', label: 'dairia.ai' },
+  { href: 'https://enclair.media', label: 'enclair.media' },
+  { href: 'https://gerermesatmp.com', label: 'gerermesatmp.com' },
+];
+
+const languagePages = [
+  { href: '/de', label: 'Deutsch' },
+  { href: '/zh', label: 'Chinese' },
+  { href: '/ja', label: 'Japanese' },
+  { href: '/es', label: 'Espanol' },
+  { href: '/it', label: 'Italiano' },
+];
+---
+
+<footer class="bg-dark text-white">
+  <!-- Main Footer -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <!-- Brand Column -->
+      <div class="lg:col-span-1">
+        <a href="/" class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <span class="text-white font-display font-bold text-lg">D</span>
+          </div>
+          <span class="font-display text-xl font-bold tracking-tight">
+            DAIRIA <span class="text-primary">LAW</span>
+          </span>
+        </a>
+        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+          Part of <strong class="text-white">DAIRIA Avocats</strong> &mdash; French Employment Law Firm.
+          Expert legal counsel for international employers operating in France.
+        </p>
+        <div class="space-y-2 text-sm text-gray-400">
+          <p class="flex items-start gap-2">
+            <svg class="w-4 h-4 mt-0.5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            7 rue Marbeuf, 75008 Paris, France
+          </p>
+          <p class="flex items-start gap-2">
+            <svg class="w-4 h-4 mt-0.5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            contact@dairia-law.com
+          </p>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="font-display text-base font-semibold mb-5 text-white">Services</h3>
+        <ul class="space-y-3">
+          {serviceLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="font-display text-base font-semibold mb-5 text-white">Company</h3>
+        <ul class="space-y-3">
+          {companyLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="font-display text-base font-semibold mt-8 mb-4 text-white">Languages</h3>
+        <ul class="space-y-2">
+          {languagePages.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Partner Sites -->
+      <div>
+        <h3 class="font-display text-base font-semibold mb-5 text-white">DAIRIA Network</h3>
+        <ul class="space-y-3">
+          {partnerSites.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-white transition-colors duration-200 inline-flex items-center gap-1.5"
+              >
+                {link.label}
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-gray-500">
+          &copy; 2026 DAIRIA Law. All rights reserved.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href="/privacy" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Privacy Policy</a>
+          <a href="/terms" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Terms of Use</a>
+          <a href="/legal-notices" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Legal Notices</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

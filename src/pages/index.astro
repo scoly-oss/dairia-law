@@ -1,0 +1,403 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    title: 'Employment Law Advisory',
+    description: 'Day-to-day HR legal support for international companies operating in France. Employment contracts, working time, benefits, and more.',
+    icon: 'briefcase',
+  },
+  {
+    title: 'Restructuring & Redundancies',
+    description: 'PSE plans, collective redundancy procedures, individual dismissals. Navigate complex French labour law with confidence.',
+    icon: 'layers',
+  },
+  {
+    title: 'M&A Labour Due Diligence',
+    description: 'Employee transfer under Article L.1224-1, social audits, workforce integration planning, and risk assessment.',
+    icon: 'search',
+  },
+  {
+    title: 'Compliance & Investigations',
+    description: 'Internal investigations, harassment and discrimination claims, whistleblower compliance, and workplace safety.',
+    icon: 'shield',
+  },
+];
+
+const aiFeatures = [
+  { label: 'Multilingual', detail: 'EN, DE, ZH, JA, ES, IT, FR and more' },
+  { label: 'Available 24/7', detail: 'Instant answers, any time zone' },
+  { label: 'Legally Sourced', detail: 'Grounded in legislation and case law' },
+  { label: 'Updated in Real-Time', detail: 'Always current with latest reforms' },
+];
+
+const stats = [
+  { value: '15+', label: 'Years combined experience' },
+  { value: '500+', label: 'Companies advised' },
+  { value: 'AI + Human', label: 'Blended expertise' },
+  { value: 'Paris 8th', label: 'Champs-Elysees area' },
+];
+
+const countries = [
+  { code: 'US', name: 'United States', flag: 'us' },
+  { code: 'GB', name: 'United Kingdom', flag: 'gb' },
+  { code: 'DE', name: 'Germany', flag: 'de' },
+  { code: 'CN', name: 'China', flag: 'cn' },
+  { code: 'JP', name: 'Japan', flag: 'jp' },
+  { code: 'ES', name: 'Spain', flag: 'es' },
+  { code: 'IT', name: 'Italy', flag: 'it' },
+];
+
+const languagePages = [
+  { href: '/de', name: 'Deutsch', country: 'Germany', flag: 'de' },
+  { href: '/zh', name: '\u4E2D\u6587', country: 'China', flag: 'cn' },
+  { href: '/ja', name: '\u65E5\u672C\u8A9E', country: 'Japan', flag: 'jp' },
+  { href: '/es', name: 'Espanol', country: 'Spain', flag: 'es' },
+  { href: '/it', name: 'Italiano', country: 'Italy', flag: 'it' },
+];
+---
+
+<Layout
+  title="DAIRIA Law — French Employment Law for International Companies"
+  description="Expert French employment law counsel for international employers. AI-powered legal assistance, multilingual support. Based in Paris."
+  canonicalPath="/"
+>
+  <!-- ========== HERO ========== -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-dark">
+    <!-- Decorative elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
+    </div>
+    <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium mb-8 border border-white/10">
+          <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+          French Employment Law — For International Companies
+        </div>
+
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-6">
+          Your French<br />Employment Law<br />
+          <span class="text-accent">Partner</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl text-white/80 leading-relaxed mb-10 max-w-2xl">
+          Expert legal counsel for international employers operating in France.
+          Contracts, restructuring, compliance, and disputes &mdash; powered by AI.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/contact" class="btn-primary text-base">
+            Schedule a Consultation
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/dairia-ai" class="btn-outline text-base">
+            Try DAIRIA AI
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TRUST BAR ========== -->
+  <section class="bg-gray-50 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <p class="text-center text-sm font-medium text-gray-500 mb-5">
+        Trusted by international companies from
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+        {countries.map((country) => (
+          <div class="flex items-center gap-2.5 text-gray-600">
+            <img
+              src={`https://flagcdn.com/24x18/${country.flag}.png`}
+              srcset={`https://flagcdn.com/48x36/${country.flag}.png 2x`}
+              width="24"
+              height="18"
+              alt={`${country.name} flag`}
+              loading="lazy"
+              class="rounded-sm shadow-sm"
+            />
+            <span class="text-sm font-medium">{country.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="section-padding bg-white" id="services">
+    <div class="container-narrow">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <p class="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Our Expertise</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-dark mb-4">
+          Comprehensive French Employment Law Services
+        </h2>
+        <p class="text-gray-600 text-lg">
+          From day-to-day advisory to complex restructuring, we cover every aspect of French labour law for international employers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {services.map((service) => (
+          <div class="group relative bg-white border border-gray-200 rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+              {service.icon === 'briefcase' && (
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              )}
+              {service.icon === 'layers' && (
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              )}
+              {service.icon === 'search' && (
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              )}
+              {service.icon === 'shield' && (
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              )}
+            </div>
+            <h3 class="font-display text-xl font-semibold text-dark mb-3">{service.title}</h3>
+            <p class="text-gray-600 leading-relaxed">{service.description}</p>
+            <div class="mt-5">
+              <a href="/services" class="inline-flex items-center text-sm font-semibold text-primary hover:text-accent transition-colors group/link">
+                Learn more
+                <svg class="w-4 h-4 ml-1.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DAIRIA AI (PROMINENT) ========== -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-dark via-dark to-primary" id="dairia-ai">
+    <!-- Decorative -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-3xl"></div>
+    </div>
+    <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+    <div class="relative section-padding">
+      <div class="container-narrow">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <!-- Left: Content -->
+          <div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-accent/20 rounded-full text-accent text-sm font-semibold mb-6">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              AI-Powered Legal Assistant
+            </div>
+
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+              Meet DAIRIA AI &mdash;<br />Your 24/7 Legal<br />
+              <span class="text-accent">Assistant</span>
+            </h2>
+
+            <p class="text-lg text-white/70 leading-relaxed mb-8">
+              The first AI-powered French employment law assistant. Available in 12+ languages.
+              Instant answers grounded in legislation, case law, and collective agreements.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+              {aiFeatures.map((feature) => (
+                <div class="flex items-start gap-3">
+                  <div class="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center mt-0.5 shrink-0">
+                    <svg class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-white font-semibold text-sm">{feature.label}</p>
+                    <p class="text-white/50 text-sm">{feature.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <a href="/dairia-ai" class="btn-primary text-base">
+                Start Free Trial
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <div class="text-white/60 text-sm">
+                Starting at <span class="text-white font-bold text-lg">90 EUR</span> HT/month
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Visual -->
+          <div class="relative">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8">
+              <!-- Mock Chat UI -->
+              <div class="flex items-center gap-3 mb-6 pb-5 border-b border-white/10">
+                <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold text-sm">DAIRIA AI</p>
+                  <p class="text-white/40 text-xs">French Employment Law Assistant</p>
+                </div>
+                <div class="ml-auto flex items-center gap-1.5">
+                  <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                  <span class="text-green-400 text-xs font-medium">Online</span>
+                </div>
+              </div>
+
+              <!-- Chat Messages -->
+              <div class="space-y-4">
+                <div class="flex justify-end">
+                  <div class="bg-primary/40 rounded-2xl rounded-tr-md px-4 py-3 max-w-[85%]">
+                    <p class="text-white text-sm">What is the notice period for dismissing an employee with 8 years of seniority?</p>
+                  </div>
+                </div>
+                <div class="flex justify-start">
+                  <div class="bg-white/10 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+                    <p class="text-white/90 text-sm leading-relaxed">
+                      Under Article L.1234-1 of the French Labour Code, an employee with 8 years of seniority is entitled to a <strong class="text-white">2-month notice period</strong>.
+                      Note that the applicable collective agreement may provide for a longer notice period.
+                    </p>
+                    <div class="mt-3 flex items-center gap-2 text-xs text-white/40">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                      Source: Code du travail, Art. L.1234-1
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input area -->
+              <div class="mt-6 pt-5 border-t border-white/10">
+                <div class="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10">
+                  <span class="text-white/30 text-sm flex-1">Ask anything about French employment law...</span>
+                  <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating badges -->
+            <div class="absolute -top-4 -right-4 bg-accent text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+              12+ Languages
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY DAIRIA ========== -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <p class="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Why DAIRIA</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-dark mb-4">
+          The Right Partner for Your French Operations
+        </h2>
+        <p class="text-gray-600 text-lg">
+          We combine deep legal expertise with cutting-edge AI technology to deliver faster, smarter, and more accessible legal services.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {stats.map((stat) => (
+          <div class="text-center p-6 rounded-2xl bg-gray-50 border border-gray-100">
+            <p class="font-display text-3xl sm:text-4xl font-bold text-primary mb-2">{stat.value}</p>
+            <p class="text-gray-600 text-sm font-medium">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LANGUAGE PAGES ========== -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="text-sm font-semibold text-accent uppercase tracking-wider mb-3">International Reach</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-dark mb-4">
+          We Speak Your Language
+        </h2>
+        <p class="text-gray-600 text-lg">
+          Access our expertise in your preferred language. Each page is tailored to the specific needs of employers from your country.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {languagePages.map((page) => (
+          <a
+            href={page.href}
+            class="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+          >
+            <img
+              src={`https://flagcdn.com/48x36/${page.flag}.png`}
+              srcset={`https://flagcdn.com/96x72/${page.flag}.png 2x`}
+              width="48"
+              height="36"
+              alt={`${page.country} flag`}
+              loading="lazy"
+              class="rounded shadow-sm"
+            />
+            <div class="text-center">
+              <p class="font-display font-semibold text-dark group-hover:text-primary transition-colors">{page.name}</p>
+              <p class="text-xs text-gray-500 mt-0.5">{page.country}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FINAL CTA ========== -->
+  <section class="relative overflow-hidden bg-primary">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-accent rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative section-padding">
+      <div class="container-narrow text-center">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+          Ready to Simplify<br />French Employment Law?
+        </h2>
+        <p class="text-lg text-white/70 max-w-2xl mx-auto mb-10">
+          Whether you need ongoing legal support, a one-time consultation, or AI-powered assistance,
+          we are here to help you navigate French labour law with confidence.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/contact" class="btn-primary text-base">
+            Schedule a Consultation
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/dairia-ai" class="btn-outline text-base">
+            Try DAIRIA AI Free
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
