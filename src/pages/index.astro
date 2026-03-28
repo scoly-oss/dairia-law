@@ -25,10 +25,10 @@ const services = [
 ];
 
 const aiFeatures = [
-  { label: 'Multilingual', detail: 'EN, DE, ZH, JA, ES, IT, FR and more' },
-  { label: 'Available 24/7', detail: 'Instant answers, any time zone' },
-  { label: 'Legally Sourced', detail: 'Grounded in legislation and case law' },
-  { label: 'Updated in Real-Time', detail: 'Always current with latest reforms' },
+  { label: 'Speaks Your Language', detail: 'German, Chinese, Japanese, Spanish, Italian, English and more' },
+  { label: 'Available 24/7', detail: 'Instant answers, any time zone — no waiting' },
+  { label: 'Legally Sourced', detail: 'Grounded in French legislation, case law & collective agreements' },
+  { label: 'Updated in Real-Time', detail: 'Always current with latest reforms and rulings' },
 ];
 
 const stats = [
@@ -79,13 +79,13 @@ const languagePages = [
         </div>
 
         <h1 class="font-sans text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-6">
-          Your French<br />Employment Law<br />
-          <span class="text-accent">Partner</span>
+          An AI That Speaks<br />Your Language.<br />
+          <span class="text-accent">Lawyers Who Know<br />French Law.</span>
         </h1>
 
         <p class="text-lg sm:text-xl text-white/80 leading-relaxed mb-10 max-w-2xl">
-          Expert legal counsel for international employers operating in France.
-          Contracts, restructuring, compliance, and disputes &mdash; powered by AI.
+          Get instant answers in your language from <strong class="text-white">DAIRIA AI</strong> &mdash; our multilingual legal AI.
+          And when you need human expertise, our <strong class="text-white">English-speaking lawyers</strong> at DAIRIA Avocats handle your French employment law matters.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4">
@@ -204,13 +204,13 @@ const languagePages = [
             </div>
 
             <h2 class="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
-              Meet DAIRIA AI &mdash;<br />Your 24/7 Legal<br />
-              <span class="text-accent">Assistant</span>
+              Ask In Your Language.<br />Get Expert French Law<br />
+              <span class="text-accent">Answers Instantly.</span>
             </h2>
 
             <p class="text-lg text-white/70 leading-relaxed mb-8">
-              The first AI-powered French employment law assistant. Available in 12+ languages.
-              Instant answers grounded in legislation, case law, and collective agreements.
+              DAIRIA AI understands German, Chinese, Japanese, Spanish, Italian, English and more.
+              Ask your French employment law questions in your native language &mdash; get precise, sourced answers in seconds. No language barrier. No waiting.
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
@@ -308,26 +308,97 @@ const languagePages = [
     </div>
   </section>
 
-  <!-- ========== WHY DAIRIA ========== -->
+  <!-- ========== TWO PILLARS ========== -->
   <section class="section-padding bg-white">
     <div class="container-narrow">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <p class="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Why DAIRIA</p>
+        <p class="text-sm font-semibold text-accent uppercase tracking-wider mb-3">How It Works</p>
         <h2 class="font-sans text-3xl sm:text-4xl font-bold text-dark mb-4">
-          The Right Partner for Your French Operations
+          Two Ways to Get Help. One Unbeatable Combo.
         </h2>
         <p class="text-gray-600 text-lg">
-          We combine deep legal expertise with cutting-edge AI technology to deliver faster, smarter, and more accessible legal services.
+          Whatever your need, we have you covered &mdash; instantly through AI or personally through our lawyers.
         </p>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-        {stats.map((stat) => (
-          <div class="text-center p-6 rounded-2xl bg-gray-50 border border-gray-100">
-            <p class="font-sans text-3xl sm:text-4xl font-bold text-primary mb-2">{stat.value}</p>
-            <p class="text-gray-600 text-sm font-medium">{stat.label}</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Pillar 1: DAIRIA AI -->
+        <div class="relative bg-gradient-to-br from-dark to-primary rounded-2xl p-8 sm:p-10 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl"></div>
+          <div class="relative">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/20 rounded-full text-accent text-xs font-bold uppercase tracking-wider mb-6">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              AI Assistant
+            </div>
+            <h3 class="font-sans text-2xl sm:text-3xl font-bold mb-4">DAIRIA AI</h3>
+            <p class="text-white/70 text-lg leading-relaxed mb-6">
+              Your AI legal assistant that <strong class="text-white">speaks your language</strong>. Ask any French employment law question in German, Chinese, Japanese, Spanish, Italian or English &mdash; get sourced answers in seconds.
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-3 text-white/80">
+                <svg class="w-5 h-5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Available 24/7, any time zone
+              </li>
+              <li class="flex items-center gap-3 text-white/80">
+                <svg class="w-5 h-5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Answers in your native language
+              </li>
+              <li class="flex items-center gap-3 text-white/80">
+                <svg class="w-5 h-5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Grounded in legislation & case law
+              </li>
+              <li class="flex items-center gap-3 text-white/80">
+                <svg class="w-5 h-5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                From 90 EUR HT/month
+              </li>
+            </ul>
+            <a href="/dairia-ai" class="btn-primary text-sm">
+              Try DAIRIA AI Free
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </a>
           </div>
-        ))}
+        </div>
+
+        <!-- Pillar 2: DAIRIA Avocats -->
+        <div class="relative bg-white border-2 border-gray-200 rounded-2xl p-8 sm:p-10 overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+          <div class="relative">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              Law Firm
+            </div>
+            <h3 class="font-sans text-2xl sm:text-3xl font-bold text-dark mb-4">DAIRIA Avocats</h3>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+              When you need human expertise, our <strong class="text-dark">English-speaking lawyers</strong> in Paris handle your French employment law matters personally &mdash; contracts, disputes, restructuring, litigation.
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                English-speaking team in Paris
+              </li>
+              <li class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                15+ years combined experience
+              </li>
+              <li class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                500+ international companies advised
+              </li>
+              <li class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                7 rue Marbeuf, Paris 8th
+              </li>
+            </ul>
+            <a href="/contact" class="btn-outline-primary text-sm">
+              Schedule a Consultation
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -338,10 +409,11 @@ const languagePages = [
       <div class="text-center max-w-2xl mx-auto mb-12">
         <p class="text-sm font-semibold text-accent uppercase tracking-wider mb-3">International Reach</p>
         <h2 class="font-sans text-3xl sm:text-4xl font-bold text-dark mb-4">
-          We Speak Your Language
+          DAIRIA AI Speaks Your Language
         </h2>
         <p class="text-gray-600 text-lg">
-          Access our expertise in your preferred language. Each page is tailored to the specific needs of employers from your country.
+          No matter where you're from, DAIRIA AI answers your French employment law questions in your native language.
+          And when you need a lawyer, our English-speaking team is just a call away.
         </p>
       </div>
 
@@ -380,11 +452,11 @@ const languagePages = [
     <div class="relative section-padding">
       <div class="container-narrow text-center">
         <h2 class="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-          Ready to Simplify<br />French Employment Law?
+          Start With AI.<br />Scale With Lawyers.
         </h2>
         <p class="text-lg text-white/70 max-w-2xl mx-auto mb-10">
-          Whether you need ongoing legal support, a one-time consultation, or AI-powered assistance,
-          we are here to help you navigate French labour law with confidence.
+          Try DAIRIA AI for free and get instant answers in your language.
+          When you need deeper support, our English-speaking lawyers in Paris take over seamlessly.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="/contact" class="btn-primary text-base">
