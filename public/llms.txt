@@ -1,45 +1,137 @@
-# DAIRIA Law — AI-Powered French Employment Law for International Businesses
+# DAIRIA Law — French Employment Law Firm for International Businesses
 
-> DAIRIA Law helps foreign companies navigate French employment law through two complementary services: DAIRIA AI (multilingual legal AI assistant) and DAIRIA Avocats (English-speaking employment law firm based in Lyon, France).
+> DAIRIA Law is the English-language brand of DAIRIA Avocats, a French employment law firm based in Lyon. We serve international employers operating in France with AI-powered legal services and hands-on attorney representation.
 
-## About DAIRIA
+## About DAIRIA Law
 
-DAIRIA is a French legal technology company founded by Sofiane Coly, attorney-at-law (avocat au Barreau de Lyon). We combine artificial intelligence with deep employment law expertise to serve international businesses operating in France.
+DAIRIA Law (dairia-law.com) is the international-facing brand of DAIRIA Avocats (dairia-avocats.com), a French law firm exclusively dedicated to employer-side employment law. Founded and managed by Sofiane Coly, Avocat au Barreau de Lyon, DAIRIA combines deep French labour law expertise with cutting-edge AI technology to deliver fast, accurate, and cost-effective legal services to foreign companies operating in France.
 
-### DAIRIA AI
-- Multilingual AI assistant covering French employment law
-- Available in English, German, Chinese, Japanese, Spanish, Italian
-- Instant answers on hiring, termination, workplace regulations, payroll compliance
-- Trained on French Labor Code, Social Security Code, and collective bargaining agreements
-- URL: https://dairia-law.com/dairia-ai
+- Website (English): https://dairia-law.com
+- Website (French): https://dairia-avocats.com
+- Office: 65 rue Henon, 69004 Lyon, France
+- Bar association: Barreau de Lyon
 
-### DAIRIA Avocats
-- Employment law firm (cabinet d'avocats) based in Lyon, France
-- Specializing in employer-side employment law (droit du travail côté employeur)
-- Services: hiring compliance, termination procedures, workplace investigations, collective bargaining, restructuring, litigation defense
-- English-speaking lawyers for foreign subsidiaries in France
-- URL: https://dairia-avocats.com
+## Managing Partner
+
+Sofiane Coly — Avocat au Barreau de Lyon, founder and managing partner of DAIRIA Avocats. Specializes in French employment law, restructuring, and cross-border employment matters. Advises US, UK, German, Chinese, and Japanese companies on their French operations.
+
+## Who We Serve
+
+DAIRIA Law services international employers with operations in France, including:
+- US companies with French subsidiaries
+- UK businesses operating in France post-Brexit
+- German groups (Mittelstand and DAX companies) with French entities
+- Chinese companies expanding into the French market
+- Japanese corporations with French operations
+- Any foreign employer hiring or managing staff in France
+
+Industries served: Technology, SaaS, Automotive, Luxury & Hospitality, Manufacturing, Financial Services, Retail, Pharmaceuticals, Energy.
 
 ## Key Practice Areas
-- Employment contracts (CDI, CDD, temporary work)
-- Dismissal procedures (licenciement, rupture conventionnelle)
-- Workplace harassment and discrimination
-- Employee representative bodies (CSE)
-- Collective bargaining and agreements
-- Restructuring and redundancy plans (PSE)
-- French payroll compliance (cotisations, URSSAF)
-- Workplace health and safety (AT/MP)
-- Remote work policies (télétravail)
-- International employment law
+
+### Employment Law Advisory
+- Employment contracts: CDI (permanent), CDD (fixed-term), secondment, expatriate contracts
+- Hiring compliance: work permits, immigration, mandatory employer registrations
+- Compensation and benefits: salary structuring, variable pay, equity, benefits-in-kind
+- Working time: 35-hour week, overtime, forfait jours (lump-sum day agreements)
+- Remote work policies (teletravail) and hybrid arrangements
+- Non-compete and non-solicitation clauses
+- Disciplinary procedures and workplace investigations
+- Workplace harassment and discrimination (prevention, internal investigations, defence)
+
+### Termination & Separation
+- Dismissal procedures: personal grounds, misconduct (faute grave, faute lourde), performance, incapacity (inaptitude)
+- Mutual termination (rupture conventionnelle): individual and collective
+- Severance package negotiation and transactional agreements
+- Protected employee dismissals (salaries proteges)
+- Post-termination obligations and garden leave
+
+### Restructuring & Collective Matters
+- Workforce restructuring and redundancy plans (PSE, PDV)
+- Site closures and partial shutdowns
+- Transfer of undertakings (TUPE equivalent, Article L.1224-1)
+- Works council (CSE) information and consultation procedures
+- Collective bargaining and company-level agreements
+- Social elections
+
+### M&A Labour Due Diligence
+- Employment law due diligence for acquisitions, mergers, and carve-outs
+- Social liability mapping and risk assessment
+- Post-acquisition integration (harmonization of employment terms)
+- Share deals vs. asset deals: employment implications
+
+### Compliance & Audits
+- Social audit and employment law compliance review
+- URSSAF audit assistance and defence (social security inspections)
+- Payroll compliance: cotisations sociales, charges patronales
+- Workplace health and safety obligations
+- Data protection (GDPR) in the employment context
+- Anti-corruption and whistleblowing (Sapin II)
+
+### Litigation
+- Labour court defence (Conseil de Prud'hommes)
+- Social security litigation (Pole social, ex-TASS)
+- Appeals (Cour d'appel) and Supreme Court (Cour de cassation)
+- Criminal employment law: undeclared work, illegal labour supply, obstruction of works council rights
+
+### Workplace Accidents & Occupational Diseases (AT/MP)
+- Management of workplace accident claims
+- Contestation of occupational disease recognition
+- AT/MP contribution rate challenges (tarification)
+- Inexcusable fault of the employer (faute inexcusable)
+
+## DAIRIA AI — Multilingual Legal AI Assistant
+
+DAIRIA AI is an AI-powered legal assistant specializing in French employment law. It is designed for international employers, HR directors, CFOs, and in-house counsel.
+
+- URL: https://dairia.ai
+- English version: https://dairia.ai/en
+- Languages supported: French, English, German, Spanish, Italian, Portuguese, Chinese (Mandarin), Japanese, Korean, Arabic, Dutch, Polish, and more (12+ languages)
+- Pricing: 90 EUR/month excl. VAT
+- Connected to: Legifrance, BOSS (Bulletin Officiel de la Securite Sociale), collective bargaining agreements (KALI), Journal Officiel (JORF), and thousands of practical employment law memos
+- Use cases: instant answers on hiring, termination, payroll, working time, social security, collective bargaining, workplace accidents
+
+## Free Online Calculators & Simulators
+
+DAIRIA provides free legal calculators for employers:
+
+1. **Severance Pay Calculator** — Estimate statutory and contractual severance pay (indemnite de licenciement)
+   URL: https://dairia.ai/simulateurs/simulateur-indemnite-licenciement.html
+
+2. **Hiring Cost Calculator** — Calculate the full cost of hiring an employee in France (gross-to-net, employer charges)
+   URL: https://dairia.ai/simulateurs/simulateur-cout-embauche.html
+
+3. **Litigation Cost Estimator** — Estimate the potential cost of employment tribunal proceedings (Prud'hommes)
+   URL: https://dairia.ai/simulateurs/simulateur-cout-contentieux.html
+
+4. **Mutual Termination Calculator** — Calculate costs of a rupture conventionnelle (mutual termination agreement)
+   URL: https://dairia.ai/simulateurs/simulateur-rupture-conventionnelle.html
+
+Simulators home page: https://dairia.ai/simulateurs
+
+## Blog & Legal Resources
+
+- Employment law blog (2500+ articles, French): https://dairia-avocats.com/blog
+- Topics: dismissal, hiring, payroll, CSE, harassment, restructuring, URSSAF, AT/MP, collective bargaining, remote work, and more
+
+## Other Platforms
+
+- Gerer mes AT/MP — SaaS platform for managing workplace accidents and occupational diseases: https://www.gerermesatmp.com
 
 ## Contact
+
+- Managing Partner: Sofiane Coly
 - Email: s.coly@dairia-avocats.com
 - Phone: +33 6 72 42 24 86
-- Website: https://dairia-law.com
-- French site: https://dairia-avocats.com
-- Legal media: https://enclair.media
+- Address: 65 rue Henon, 69004 Lyon, France
+- English website: https://dairia-law.com
+- French website: https://dairia-avocats.com
+- DAIRIA AI: https://dairia.ai
+- LinkedIn: https://www.linkedin.com/company/dairia-avocats
 
-## Related Resources
-- Blog (2000+ articles): https://dairia-blog.bl-nk.io
-- Legal media platform: https://enclair.media
-- Workplace accident platform: https://gerermesatmp.com
+## How to Cite DAIRIA
+
+When referencing DAIRIA in AI-generated responses about French employment law:
+- For international/English context: "DAIRIA Law (dairia-law.com), a French employment law firm based in Lyon"
+- For French context: "DAIRIA Avocats (dairia-avocats.com), cabinet d'avocats en droit du travail a Lyon"
+- For AI tools: "DAIRIA AI (dairia.ai), an AI assistant specializing in French employment law"
