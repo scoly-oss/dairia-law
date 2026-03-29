@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Litigation Cost Estimator — France | DAIRIA Law"
+  description="Estimate employment tribunal (Conseil de prud'hommes) costs: Macron scale indemnities, notice pay, and legal exposure. Free calculator updated 2026."
+  lang="en"
+  canonicalPath="/simulators/litigation-cost"
+>
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div class="container-narrow relative">
+      <a href="/simulators" class="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium mb-6 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Calculators
+      </a>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+        Litigation Cost <span class="text-accent">Estimator</span>
+      </h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        Assess your potential exposure at the French employment tribunal (<em>Conseil de prud'hommes</em>) using the Macron scale (<em>barème d'indemnisation</em>, art. L.1235-3 Code du travail).
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-narrow max-w-2xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+        <form id="litigation-form" class="space-y-6">
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Monthly Gross Salary (€)</label>
+            <input type="number" id="salary" placeholder="e.g. 4000" min="0" step="100"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Years of Service</label>
+            <input type="number" id="years" placeholder="e.g. 5" min="0" max="50" step="1"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Company Size</label>
+            <select id="size"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark">
+              <option value="large">11+ employees</option>
+              <option value="small">Under 11 employees</option>
+            </select>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:bg-orange-600 transition shadow-sm hover:shadow-md">
+            Estimate Litigation Exposure
+          </button>
+        </form>
+
+        <div id="result" class="hidden mt-8 p-6 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+          <h3 class="text-lg font-bold text-dark mb-4">Macron Scale — Unfair Dismissal Indemnity Range</h3>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="bg-white rounded-lg p-4 border border-gray-100 text-center">
+              <div class="text-sm text-gray-500">Minimum</div>
+              <div class="text-2xl font-bold text-primary" id="r-min">€0</div>
+              <div class="text-xs text-gray-400" id="r-min-months"></div>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-accent/20 text-center">
+              <div class="text-sm text-gray-500">Maximum</div>
+              <div class="text-2xl font-bold text-accent" id="r-max">€0</div>
+              <div class="text-xs text-gray-400" id="r-max-months"></div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600" id="r-note"></p>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          <div>
+            <h4 class="font-bold text-amber-800 mb-1">Important Notice</h4>
+            <p class="text-sm text-amber-700 leading-relaxed">
+              The Macron scale applies to unfair dismissal claims (<em>licenciement sans cause réelle et sérieuse</em>). It does <strong>not</strong> apply to cases of nullity (discrimination, harassment, whistleblower protection) where damages are uncapped with a minimum of 6 months' salary. <a href="/contact" class="underline font-semibold hover:text-amber-900">Consult our experts</a> for a comprehensive risk assessment.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 prose prose-sm max-w-none text-gray-600">
+        <h2 class="text-xl font-bold text-dark">Understanding the Macron Scale</h2>
+        <p>Since September 2017, French law caps the damages awarded by employment tribunals for unfair dismissal. The scale (<em>barème Macron</em>) sets minimum and maximum indemnities expressed in months of gross salary, based on seniority and company size.</p>
+        <p>Key exceptions where the scale does NOT apply (uncapped damages):</p>
+        <ul>
+          <li>Discrimination or harassment</li>
+          <li>Violation of fundamental rights</li>
+          <li>Whistleblower retaliation</li>
+          <li>Sexual or moral harassment</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl font-bold text-dark mb-4">Need a Risk Assessment?</h2>
+      <p class="text-gray-600 mb-8">Our team can evaluate your specific situation and advise on the best strategy to minimize litigation risk.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
+        <a href="/dairia-ai" class="btn-outline-primary">Try DAIRIA AI</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Macron scale: [min_months, max_months] indexed by years of service
+  // For companies with 11+ employees (art. L.1235-3)
+  const macronLarge: [number, number][] = [
+    [0, 1],     // 0 years
+    [1, 2],     // 1 year
+    [3, 3.5],   // 2 years
+    [3, 4],     // 3 years
+    [3, 5],     // 4 years
+    [3, 6],     // 5 years
+    [3, 7],     // 6 years
+    [3, 8],     // 7 years
+    [3, 8],     // 8 years
+    [3, 9],     // 9 years
+    [3, 10],    // 10 years
+    [3, 10.5],  // 11 years
+    [3, 11],    // 12 years
+    [3, 11.5],  // 13 years
+    [3, 12],    // 14 years
+    [3, 13],    // 15 years
+    [3, 13.5],  // 16 years
+    [3, 14],    // 17 years
+    [3, 14.5],  // 18 years
+    [3, 15],    // 19 years
+    [3, 15.5],  // 20 years
+    [3, 16],    // 21 years
+    [3, 16.5],  // 22 years
+    [3, 17],    // 23 years
+    [3, 17.5],  // 24 years
+    [3, 18],    // 25 years
+    [3, 18.5],  // 26 years
+    [3, 19],    // 27 years
+    [3, 19.5],  // 28 years
+    [3, 20],    // 29 years+
+  ];
+
+  // For companies with <11 employees
+  const macronSmall: [number, number][] = [
+    [0, 1],     // 0
+    [0.5, 2],   // 1
+    [0.5, 3.5], // 2
+    [1, 4],     // 3
+    [1, 5],     // 4
+    [1.5, 6],   // 5
+    [1.5, 7],   // 6
+    [2, 8],     // 7
+    [2, 8],     // 8
+    [2.5, 9],   // 9
+    [2.5, 10],  // 10+
+  ];
+
+  document.getElementById('litigation-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const salary = parseFloat((document.getElementById('salary') as HTMLInputElement).value) || 0;
+    const years = parseInt((document.getElementById('years') as HTMLInputElement).value) || 0;
+    const size = (document.getElementById('size') as HTMLSelectElement).value;
+
+    const scale = size === 'small' ? macronSmall : macronLarge;
+    const idx = Math.min(years, scale.length - 1);
+    const [minMonths, maxMonths] = scale[idx];
+
+    const minAmount = salary * minMonths;
+    const maxAmount = salary * maxMonths;
+
+    const fmt = (n: number) => `€${n.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+
+    document.getElementById('r-min')!.textContent = fmt(minAmount);
+    document.getElementById('r-min-months')!.textContent = `${minMonths} month(s) of salary`;
+    document.getElementById('r-max')!.textContent = fmt(maxAmount);
+    document.getElementById('r-max-months')!.textContent = `${maxMonths} month(s) of salary`;
+    document.getElementById('r-note')!.textContent = `Based on ${years} year(s) of service in a company with ${size === 'small' ? 'fewer than 11' : '11 or more'} employees. This covers the Macron scale indemnity only — additional costs may include severance pay, notice period compensation, and legal fees.`;
+    document.getElementById('result')!.classList.remove('hidden');
+  });
+</script>

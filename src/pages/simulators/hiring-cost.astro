@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Hiring Cost Calculator — France | DAIRIA Law"
+  description="Calculate the full employer cost of hiring in France: gross-to-net salary, social charges (cotisations patronales), and total annual cost. Updated 2026."
+  lang="en"
+  canonicalPath="/simulators/hiring-cost"
+>
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div class="container-narrow relative">
+      <a href="/simulators" class="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium mb-6 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Calculators
+      </a>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+        Hiring Cost <span class="text-accent">Calculator</span>
+      </h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        Estimate the full employer cost of hiring an employee in France, including mandatory social charges (<em>cotisations patronales</em>). PASS 2026: €48,060/year.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-narrow max-w-2xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+        <form id="hiring-form" class="space-y-6">
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Annual Gross Salary (€)</label>
+            <input type="number" id="gross" placeholder="e.g. 48000" min="0" step="1000"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Employee Status</label>
+            <select id="status"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark">
+              <option value="non-cadre">Non-executive (Non-cadre)</option>
+              <option value="cadre">Executive (Cadre)</option>
+            </select>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-primary text-white font-bold py-3.5 rounded-lg hover:bg-primary/90 transition shadow-sm hover:shadow-md">
+            Calculate Total Employer Cost
+          </button>
+        </form>
+
+        <div id="result" class="hidden mt-8 p-6 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+          <h3 class="text-lg font-bold text-dark mb-4">Estimated Annual Employer Cost</h3>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="bg-white rounded-lg p-4 border border-gray-100 text-center">
+              <div class="text-sm text-gray-500">Gross Salary</div>
+              <div class="text-xl font-bold text-dark" id="r-gross">€0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-gray-100 text-center">
+              <div class="text-sm text-gray-500">Employer Charges</div>
+              <div class="text-xl font-bold text-accent" id="r-charges">€0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-gray-100 text-center">
+              <div class="text-sm text-gray-500">Estimated Net Salary</div>
+              <div class="text-xl font-bold text-dark" id="r-net">€0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-primary/20 text-center">
+              <div class="text-sm text-gray-500">Total Employer Cost</div>
+              <div class="text-xl font-bold text-primary" id="r-total">€0</div>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-gray-100">
+            <h4 class="text-sm font-semibold text-dark mb-2">Breakdown of Employer Charges</h4>
+            <div id="r-breakdown" class="text-sm text-gray-600 space-y-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          <div>
+            <h4 class="font-bold text-amber-800 mb-1">Important Notice</h4>
+            <p class="text-sm text-amber-700 leading-relaxed">
+              Rates are approximate averages for 2026. Actual charges depend on company size, industry, location, collective bargaining agreement, and applicable exemptions (e.g., <em>réduction générale de cotisations</em>). For precise calculations, <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 prose prose-sm max-w-none text-gray-600">
+        <h2 class="text-xl font-bold text-dark">Understanding French Employer Costs</h2>
+        <p>In France, employer social charges (<em>cotisations patronales</em>) typically add <strong>40-45%</strong> on top of the gross salary. Key contributions include:</p>
+        <ul>
+          <li><strong>Health insurance</strong> (<em>maladie</em>): 7.00% (13% for salaries above 2.5 SMIC)</li>
+          <li><strong>Old-age pension</strong> (<em>vieillesse</em>): 8.55% (capped) + 2.02% (uncapped)</li>
+          <li><strong>Family allowances</strong> (<em>allocations familiales</em>): 3.45% (5.25% above 3.5 SMIC)</li>
+          <li><strong>Unemployment</strong> (<em>chômage</em>): 4.05%</li>
+          <li><strong>Complementary pension</strong> (AGIRC-ARRCO): 4.72% to 12.95%</li>
+          <li><strong>Work accident</strong> (<em>AT/MP</em>): variable by industry (avg ~2%)</li>
+        </ul>
+        <p>The PASS (Social Security ceiling) for 2026 is <strong>€48,060/year</strong> (€4,005/month).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl font-bold text-dark mb-4">Need Expert Advice?</h2>
+      <p class="text-gray-600 mb-8">Get a precise cost analysis for your specific hiring plans in France.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
+        <a href="/dairia-ai" class="btn-outline-primary">Try DAIRIA AI</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.getElementById('hiring-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const gross = parseFloat((document.getElementById('gross') as HTMLInputElement).value) || 0;
+    const status = (document.getElementById('status') as HTMLSelectElement).value;
+    const PASS = 48060;
+    const isCadre = status === 'cadre';
+
+    // Employer charges breakdown (approximate 2026 rates)
+    const charges: {label: string, rate: number, amount: number}[] = [];
+
+    // Health insurance
+    const healthRate = gross > (21203 * 2.5) ? 0.13 : 0.07;
+    charges.push({label: `Health insurance (${(healthRate*100).toFixed(1)}%)`, rate: healthRate, amount: gross * healthRate});
+
+    // Old-age pension (capped at PASS)
+    const vieillessePlaf = Math.min(gross, PASS) * 0.0855;
+    charges.push({label: 'Old-age pension capped (8.55%)', rate: 0.0855, amount: vieillessePlaf});
+    const vieillesseDepl = gross * 0.0202;
+    charges.push({label: 'Old-age pension uncapped (2.02%)', rate: 0.0202, amount: vieillesseDepl});
+
+    // Family allowances
+    const famRate = gross > (21203 * 3.5) ? 0.0525 : 0.0345;
+    charges.push({label: `Family allowances (${(famRate*100).toFixed(2)}%)`, rate: famRate, amount: gross * famRate});
+
+    // Unemployment
+    charges.push({label: 'Unemployment (4.05%)', rate: 0.0405, amount: gross * 0.0405});
+
+    // AGIRC-ARRCO T1
+    const t1 = Math.min(gross, PASS);
+    charges.push({label: 'AGIRC-ARRCO T1 (4.72%)', rate: 0.0472, amount: t1 * 0.0472});
+
+    // AGIRC-ARRCO T2 (cadre only, above PASS)
+    if (isCadre && gross > PASS) {
+      const t2 = gross - PASS;
+      charges.push({label: 'AGIRC-ARRCO T2 (12.95%)', rate: 0.1295, amount: t2 * 0.1295});
+    }
+
+    // Work accident (average)
+    charges.push({label: 'Work accident AT/MP (~2.0%)', rate: 0.02, amount: gross * 0.02});
+
+    // AGS
+    charges.push({label: 'AGS (0.20%)', rate: 0.002, amount: Math.min(gross, PASS * 4) * 0.002});
+
+    // FNAL
+    charges.push({label: 'FNAL (0.50%)', rate: 0.005, amount: gross * 0.005});
+
+    // Versement mobilité (average)
+    charges.push({label: 'Transport levy (~2.0%)', rate: 0.02, amount: gross * 0.02});
+
+    // Formation
+    charges.push({label: 'Training contribution (1.0%)', rate: 0.01, amount: gross * 0.01});
+
+    const totalCharges = charges.reduce((sum, c) => sum + c.amount, 0);
+    const totalCost = gross + totalCharges;
+    const estimatedNet = gross * (isCadre ? 0.75 : 0.78);
+
+    const fmt = (n: number) => `€${n.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+
+    document.getElementById('r-gross')!.textContent = fmt(gross);
+    document.getElementById('r-charges')!.textContent = fmt(totalCharges);
+    document.getElementById('r-net')!.textContent = `~${fmt(estimatedNet)}`;
+    document.getElementById('r-total')!.textContent = fmt(totalCost);
+    document.getElementById('r-breakdown')!.innerHTML = charges.map(c =>
+      `<div class="flex justify-between"><span>${c.label}</span><span class="font-medium">${fmt(c.amount)}</span></div>`
+    ).join('');
+    document.getElementById('result')!.classList.remove('hidden');
+  });
+</script>

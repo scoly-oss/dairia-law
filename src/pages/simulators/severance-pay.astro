@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Severance Pay Calculator — France | DAIRIA Law"
+  description="Free French severance pay calculator. Estimate legal indemnity (indemnité de licenciement) based on salary, seniority and applicable rules. Updated 2026."
+  lang="en"
+  canonicalPath="/simulators/severance-pay"
+>
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div class="container-narrow relative">
+      <a href="/simulators" class="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium mb-6 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Calculators
+      </a>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+        Severance Pay <span class="text-accent">Calculator</span>
+      </h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        Estimate the legal minimum severance indemnity (<em>indemnité légale de licenciement</em>) under French law. Based on articles L.1234-9 and R.1234-2 of the French Labour Code.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-narrow max-w-2xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+        <form id="severance-form" class="space-y-6">
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Monthly Gross Salary (€)</label>
+            <input type="number" id="salary" placeholder="e.g. 4000" min="0" step="100"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+            <p class="text-xs text-gray-500 mt-1">Reference salary = highest of: last 12 months average OR last 3 months average (including prorated bonuses).</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Years of Service</label>
+            <input type="number" id="years" placeholder="e.g. 8" min="0" max="50" step="1"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Additional Months (beyond full years)</label>
+            <input type="number" id="months" placeholder="e.g. 6" min="0" max="11" step="1" value="0"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" />
+          </div>
+
+          <button type="submit"
+            class="w-full bg-primary text-white font-bold py-3.5 rounded-lg hover:bg-primary/90 transition shadow-sm hover:shadow-md">
+            Calculate Severance Pay
+          </button>
+        </form>
+
+        <div id="result" class="hidden mt-8 p-6 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+          <h3 class="text-lg font-bold text-dark mb-4">Estimated Legal Severance Indemnity</h3>
+          <div class="text-4xl font-bold text-primary mb-2" id="result-amount">€0</div>
+          <p class="text-sm text-gray-600 mb-4" id="result-detail"></p>
+          <div class="bg-white rounded-lg p-4 border border-gray-100">
+            <h4 class="text-sm font-semibold text-dark mb-2">Calculation Breakdown</h4>
+            <div id="result-breakdown" class="text-sm text-gray-600 space-y-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          <div>
+            <h4 class="font-bold text-amber-800 mb-1">Important Notice</h4>
+            <p class="text-sm text-amber-700 leading-relaxed">
+              This calculator computes the <strong>legal minimum</strong> severance indemnity. Your applicable collective bargaining agreement (<em>convention collective</em>) may provide for a higher amount. Additionally, this does not include notice period pay (<em>indemnité compensatrice de préavis</em>) or accrued holiday pay. For a complete assessment, <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 prose prose-sm max-w-none text-gray-600">
+        <h2 class="text-xl font-bold text-dark">How is French Severance Pay Calculated?</h2>
+        <p>Under French law (articles L.1234-9 and R.1234-2 of the <em>Code du travail</em>), the legal severance indemnity is calculated as follows:</p>
+        <ul>
+          <li><strong>1/4 of monthly salary</strong> per year of service for the first 10 years</li>
+          <li><strong>1/3 of monthly salary</strong> per year of service beyond 10 years</li>
+        </ul>
+        <p>The reference salary is the higher of: the average of the last 12 months, or 1/3 of the last 3 months (including prorated annual bonuses). A minimum of 8 months of seniority is required.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl font-bold text-dark mb-4">Need Expert Advice?</h2>
+      <p class="text-gray-600 mb-8">Every situation is unique. Get personalized guidance from our French employment law specialists.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
+        <a href="/dairia-ai" class="btn-outline-primary">Try DAIRIA AI</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.getElementById('severance-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const salary = parseFloat((document.getElementById('salary') as HTMLInputElement).value) || 0;
+    const years = parseInt((document.getElementById('years') as HTMLInputElement).value) || 0;
+    const months = parseInt((document.getElementById('months') as HTMLInputElement).value) || 0;
+
+    const totalYears = years + months / 12;
+
+    if (totalYears < 8/12) {
+      alert('Minimum 8 months of seniority required for severance pay eligibility.');
+      return;
+    }
+
+    // Legal formula: 1/4 month per year for first 10 years + 1/3 month per year beyond 10
+    let indemnity = 0;
+    const breakdownLines: string[] = [];
+
+    if (totalYears <= 10) {
+      indemnity = (salary / 4) * totalYears;
+      breakdownLines.push(`${totalYears.toFixed(2)} years × €${salary.toLocaleString()} / 4 = €${indemnity.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`);
+    } else {
+      const first10 = (salary / 4) * 10;
+      const beyond10 = (salary / 3) * (totalYears - 10);
+      indemnity = first10 + beyond10;
+      breakdownLines.push(`First 10 years: 10 × €${salary.toLocaleString()} / 4 = €${first10.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`);
+      breakdownLines.push(`Beyond 10 years: ${(totalYears - 10).toFixed(2)} × €${salary.toLocaleString()} / 3 = €${beyond10.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`);
+    }
+
+    document.getElementById('result-amount')!.textContent = `€${indemnity.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    document.getElementById('result-detail')!.textContent = `Based on ${years} year(s) and ${months} month(s) of service with a monthly gross salary of €${salary.toLocaleString()}.`;
+    document.getElementById('result-breakdown')!.innerHTML = breakdownLines.map(l => `<p>→ ${l}</p>`).join('');
+    document.getElementById('result')!.classList.remove('hidden');
+  });
+</script>

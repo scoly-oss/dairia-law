@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Mutual Termination Calculator — France | DAIRIA Law"
+  description="Calculate the minimum rupture conventionnelle indemnity under French law. Free calculator for employers planning a mutual termination. Updated 2026."
+  lang="en"
+  canonicalPath="/simulators/mutual-termination"
+>
+  <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div class="container-narrow relative">
+      <a href="/simulators" class="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium mb-6 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Calculators
+      </a>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+        Mutual Termination <span class="text-accent">Calculator</span>
+      </h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        Estimate the minimum indemnity for a <em>rupture conventionnelle</em> — the negotiated mutual termination of an employment contract under French law (art. L.1237-13 Code du travail).
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-narrow max-w-2xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+        <form id="rupture-form" class="space-y-6">
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Monthly Gross Salary (€)</label>
+            <input type="number" id="salary" placeholder="e.g. 4000" min="0" step="100"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+            <p class="text-xs text-gray-500 mt-1">Reference salary: same rules as severance pay (best of last 12 or last 3 months average).</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Years of Service</label>
+            <input type="number" id="years" placeholder="e.g. 5" min="0" max="50" step="1"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Additional Months</label>
+            <input type="number" id="months" placeholder="e.g. 6" min="0" max="11" step="1" value="0"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" />
+          </div>
+
+          <button type="submit"
+            class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:bg-orange-600 transition shadow-sm hover:shadow-md">
+            Calculate Minimum Indemnity
+          </button>
+        </form>
+
+        <div id="result" class="hidden mt-8 p-6 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+          <h3 class="text-lg font-bold text-dark mb-4">Rupture Conventionnelle — Minimum Indemnity</h3>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="bg-white rounded-lg p-4 border border-primary/20 text-center">
+              <div class="text-sm text-gray-500">Legal Minimum</div>
+              <div class="text-3xl font-bold text-primary" id="r-legal">€0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-accent/20 text-center">
+              <div class="text-sm text-gray-500">Typical Negotiated Range</div>
+              <div class="text-xl font-bold text-accent" id="r-negotiated">€0</div>
+              <div class="text-xs text-gray-400">1.5x to 3x legal minimum</div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600" id="r-detail"></p>
+
+          <div class="mt-4 bg-white rounded-lg p-4 border border-gray-100">
+            <h4 class="text-sm font-semibold text-dark mb-2">Key Dates & Deadlines</h4>
+            <div class="text-sm text-gray-600 space-y-1">
+              <p>→ <strong>Retraction period:</strong> 15 calendar days from signing</p>
+              <p>→ <strong>DREETS approval:</strong> 15 business days after retraction period</p>
+              <p>→ <strong>Employer social charge:</strong> 30% forfait social on amount exceeding legal severance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          <div>
+            <h4 class="font-bold text-amber-800 mb-1">Important Notice</h4>
+            <p class="text-sm text-amber-700 leading-relaxed">
+              The indemnity shown is the <strong>legal minimum</strong>. Your collective bargaining agreement may require a higher amount. In practice, employees often negotiate above the legal floor. The forfait social (30%) applies to any amount exceeding the legal severance indemnity. <a href="/contact" class="underline font-semibold hover:text-amber-900">Contact our team</a> for negotiation strategy.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 prose prose-sm max-w-none text-gray-600">
+        <h2 class="text-xl font-bold text-dark">How Does Rupture Conventionnelle Work?</h2>
+        <p>The <em>rupture conventionnelle</em> is a uniquely French mechanism allowing employer and employee to mutually agree to end the employment contract. Key rules:</p>
+        <ul>
+          <li>At least <strong>one preliminary meeting</strong> is required</li>
+          <li>The employee may be assisted by a colleague or union representative</li>
+          <li>Both parties have a <strong>15 calendar-day retraction period</strong></li>
+          <li>The agreement must be <strong>approved by the DREETS</strong> (labour authority)</li>
+          <li>The minimum indemnity <strong>cannot be less than the legal severance pay</strong></li>
+          <li>The employee is entitled to <strong>unemployment benefits</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-3xl font-bold text-dark mb-4">Planning a Mutual Termination?</h2>
+      <p class="text-gray-600 mb-8">Our experts can guide you through the entire process, from negotiation to DREETS approval.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
+        <a href="/dairia-ai" class="btn-outline-primary">Try DAIRIA AI</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.getElementById('rupture-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const salary = parseFloat((document.getElementById('salary') as HTMLInputElement).value) || 0;
+    const years = parseInt((document.getElementById('years') as HTMLInputElement).value) || 0;
+    const months = parseInt((document.getElementById('months') as HTMLInputElement).value) || 0;
+
+    const totalYears = years + months / 12;
+
+    // Same formula as legal severance: 1/4 per year ≤10, 1/3 per year >10
+    let indemnity = 0;
+    if (totalYears <= 10) {
+      indemnity = (salary / 4) * totalYears;
+    } else {
+      indemnity = (salary / 4) * 10 + (salary / 3) * (totalYears - 10);
+    }
+
+    const fmt = (n: number) => `€${n.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+    const low = indemnity * 1.5;
+    const high = indemnity * 3;
+
+    document.getElementById('r-legal')!.textContent = fmt(indemnity);
+    document.getElementById('r-negotiated')!.textContent = `${fmt(low)} — ${fmt(high)}`;
+    document.getElementById('r-detail')!.textContent = `Legal minimum based on ${years} year(s) and ${months} month(s) of service at €${salary.toLocaleString()}/month gross. In practice, most negotiations settle between 1.5x and 3x the legal floor depending on the context and bargaining power.`;
+    document.getElementById('result')!.classList.remove('hidden');
+  });
+</script>
