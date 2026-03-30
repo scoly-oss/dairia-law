@@ -163,15 +163,33 @@ const articleSchema = JSON.stringify({
 
 <style is:global>
   .prose h2 {
-    margin-top: 2em;
+    margin-top: 2.5em;
     margin-bottom: 0.75em;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(29, 98, 122, 0.1);
+  }
+  .prose h3 {
+    margin-top: 2em;
+    margin-bottom: 0.5em;
   }
   .prose p {
-    margin-bottom: 1.25em;
-    line-height: 1.8;
+    margin-bottom: 1.5em;
+    line-height: 1.85;
+  }
+  .prose strong {
+    color: #1D627A;
+  }
+  .prose a {
+    color: #1D627A;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.3s ease;
+  }
+  .prose a:hover {
+    color: #FF914C;
   }
   .prose ul, .prose ol {
-    margin-bottom: 1.25em;
+    margin-bottom: 1.5em;
     padding-left: 1.5em;
   }
   .prose li {
@@ -179,8 +197,90 @@ const articleSchema = JSON.stringify({
   }
   .prose blockquote {
     border-left: 4px solid #1D627A;
-    padding-left: 1.5em;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(29, 98, 122, 0.04);
+    border-radius: 0 0.75rem 0.75rem 0;
     font-style: italic;
-    color: #4a5568;
+    color: #1D627A;
+  }
+  .prose blockquote p:last-child {
+    margin-bottom: 0;
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(29, 98, 122, 0.08);
+    border: 1px solid rgba(29, 98, 122, 0.1);
+    font-size: 0.95rem;
+  }
+  .prose thead {
+    background: linear-gradient(135deg, #1D627A, #14475a);
+  }
+  .prose th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+  }
+  .prose td {
+    padding: 0.9rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(29, 98, 122, 0.08);
+    border-right: 1px solid rgba(29, 98, 122, 0.05);
+    vertical-align: top;
+  }
+  .prose td:last-child {
+    border-right: none;
+  }
+  .prose tbody tr:nth-child(even) {
+    background: rgba(29, 98, 122, 0.03);
+  }
+  .prose tbody tr:hover {
+    background: rgba(29, 98, 122, 0.06);
+  }
+  .prose tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .prose table:not(:has(thead)) tr:first-child {
+    background: linear-gradient(135deg, #1D627A, #14475a);
+  }
+  .prose table:not(:has(thead)) tr:first-child td {
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+  }
+  .prose hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(29, 98, 122, 0.15), transparent);
+    margin: 3rem 0;
+  }
+  .prose img {
+    border-radius: 1rem;
+    margin: 2rem 0;
+  }
+  @media (max-width: 768px) {
+    .prose table {
+      font-size: 0.85rem;
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .prose th, .prose td {
+      padding: 0.65rem 0.85rem;
+      white-space: nowrap;
+    }
   }
 </style>
