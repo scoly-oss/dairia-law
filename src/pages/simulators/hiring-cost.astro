@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout
   title="Hiring Cost Calculator — France | DAIRIA Law"
-  description="Calculate the full employer cost of hiring in France: gross-to-net salary, social charges (cotisations patronales), and total annual cost. Updated 2026."
+  description="Full French salary simulator: employer cost, gross, net before tax, net after tax. Bidirectional calculation with 2026 rates, RGDU reduction, detailed breakdown. Updated 2026."
   lang="en"
   canonicalPath="/simulators/hiring-cost"
 >
@@ -19,87 +19,226 @@ import Layout from '../../layouts/Layout.astro';
         Hiring Cost <span class="text-accent">Calculator</span>
       </h1>
       <p class="text-lg text-white/80 max-w-2xl">
-        Estimate the full employer cost of hiring an employee in France, including mandatory social charges (<em>cotisations patronales</em>). PASS 2026: €48,060/year.
+        Full French salary simulator inspired by <em>mon-entreprise.urssaf.fr</em>. Enter any amount &mdash; employer cost, gross, net before or after tax &mdash; and all others update instantly. 2026 rates &amp; RGDU included.
       </p>
     </div>
   </section>
 
   <section class="section-padding">
-    <div class="container-narrow max-w-2xl mx-auto">
-      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
-        <form id="hiring-form" class="space-y-6">
-          <div>
-            <label class="block text-sm font-semibold text-dark mb-2">Annual Gross Salary (€)</label>
-            <input type="number" id="gross" placeholder="e.g. 48000" min="0" step="1000"
-              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
-          </div>
+    <div class="container-narrow max-w-4xl mx-auto">
 
+      <!-- Options bar -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <!-- Period toggle -->
           <div>
-            <label class="block text-sm font-semibold text-dark mb-2">Employee Status</label>
-            <select id="status"
-              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark">
-              <option value="non-cadre">Non-executive (Non-cadre)</option>
-              <option value="cadre">Executive (Cadre)</option>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Period</label>
+            <div class="flex rounded-lg border border-gray-200 overflow-hidden">
+              <button type="button" data-period="monthly" class="period-btn flex-1 px-3 py-2 text-sm font-semibold bg-primary text-white transition">Monthly</button>
+              <button type="button" data-period="annual" class="period-btn flex-1 px-3 py-2 text-sm font-semibold bg-white text-gray-600 hover:bg-gray-50 transition">Annual</button>
+            </div>
+          </div>
+          <!-- Status -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Status</label>
+            <select id="opt-status" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark text-sm">
+              <option value="non-cadre">Non-cadre</option>
+              <option value="cadre" selected>Cadre</option>
             </select>
           </div>
-
-          <button type="submit"
-            class="w-full bg-primary text-white font-bold py-3.5 rounded-lg hover:bg-primary/90 transition shadow-sm hover:shadow-md">
-            Calculate Total Employer Cost
-          </button>
-        </form>
-
-        <div id="result" class="hidden mt-8 p-6 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
-          <h3 class="text-lg font-bold text-dark mb-4">Estimated Annual Employer Cost</h3>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="bg-white rounded-lg p-4 border border-gray-100 text-center">
-              <div class="text-sm text-gray-500">Gross Salary</div>
-              <div class="text-xl font-bold text-dark" id="r-gross">€0</div>
-            </div>
-            <div class="bg-white rounded-lg p-4 border border-gray-100 text-center">
-              <div class="text-sm text-gray-500">Employer Charges</div>
-              <div class="text-xl font-bold text-accent" id="r-charges">€0</div>
-            </div>
-            <div class="bg-white rounded-lg p-4 border border-gray-100 text-center">
-              <div class="text-sm text-gray-500">Estimated Net Salary</div>
-              <div class="text-xl font-bold text-dark" id="r-net">€0</div>
-            </div>
-            <div class="bg-white rounded-lg p-4 border border-primary/20 text-center">
-              <div class="text-sm text-gray-500">Total Employer Cost</div>
-              <div class="text-xl font-bold text-primary" id="r-total">€0</div>
-            </div>
+          <!-- Company size -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Company size</label>
+            <select id="opt-size" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark text-sm">
+              <option value="small">&lt; 50 employees</option>
+              <option value="large">&ge; 50 employees</option>
+            </select>
           </div>
-          <div class="bg-white rounded-lg p-4 border border-gray-100">
-            <h4 class="text-sm font-semibold text-dark mb-2">Breakdown of Employer Charges</h4>
-            <div id="r-breakdown" class="text-sm text-gray-600 space-y-1"></div>
+          <!-- Contract -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Contract</label>
+            <select id="opt-contract" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark text-sm">
+              <option value="cdi">CDI</option>
+              <option value="cdd">CDD</option>
+            </select>
+          </div>
+          <!-- AT/MP rate -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">AT/MP rate (%)</label>
+            <input type="number" id="opt-atmp" value="2.00" min="0" max="30" step="0.01" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark text-sm" />
+          </div>
+        </div>
+        <!-- Second row: versement mobilite + formation -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Transport levy (%)</label>
+            <input type="number" id="opt-vm" value="2.00" min="0" max="5" step="0.01" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Headcount</label>
+            <select id="opt-headcount" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark text-sm">
+              <option value="small">&lt; 11 employees</option>
+              <option value="large" selected>&ge; 11 employees</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <div class="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
+      <!-- 4 main value cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <!-- Employer cost -->
+        <div class="amount-card bg-white rounded-2xl shadow-lg border-2 border-gray-100 p-6 cursor-pointer transition-all hover:shadow-xl" data-field="employer">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+              <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+            </div>
+            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Total employer cost</span>
+          </div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-sm text-gray-400">&euro;</span>
+            <input type="text" id="val-employer" inputmode="decimal" placeholder="0" class="amount-input w-full text-3xl font-bold text-dark bg-transparent outline-none border-none" data-field="employer" />
+          </div>
+          <div class="text-xs text-gray-400 mt-1" id="sub-employer"></div>
+        </div>
+
+        <!-- Gross salary -->
+        <div class="amount-card bg-white rounded-2xl shadow-lg border-2 border-primary/40 p-6 cursor-pointer transition-all hover:shadow-xl" data-field="gross">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Gross salary</span>
+            <span class="text-[10px] bg-primary/10 text-primary font-bold px-1.5 py-0.5 rounded">MAIN</span>
+          </div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-sm text-gray-400">&euro;</span>
+            <input type="text" id="val-gross" inputmode="decimal" placeholder="4 000" class="amount-input w-full text-3xl font-bold text-dark bg-transparent outline-none border-none" data-field="gross" />
+          </div>
+          <div class="text-xs text-gray-400 mt-1" id="sub-gross"></div>
+        </div>
+
+        <!-- Net before tax -->
+        <div class="amount-card bg-white rounded-2xl shadow-lg border-2 border-gray-100 p-6 cursor-pointer transition-all hover:shadow-xl" data-field="netBeforeTax">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+              <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Net before tax</span>
+          </div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-sm text-gray-400">&euro;</span>
+            <input type="text" id="val-netBeforeTax" inputmode="decimal" placeholder="0" class="amount-input w-full text-3xl font-bold text-dark bg-transparent outline-none border-none" data-field="netBeforeTax" />
+          </div>
+          <div class="text-xs text-gray-400 mt-1" id="sub-netBeforeTax"></div>
+        </div>
+
+        <!-- Net after tax -->
+        <div class="amount-card bg-white rounded-2xl shadow-lg border-2 border-gray-100 p-6 cursor-pointer transition-all hover:shadow-xl" data-field="netAfterTax">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+              <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            </div>
+            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Net after tax</span>
+          </div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-sm text-gray-400">&euro;</span>
+            <input type="text" id="val-netAfterTax" inputmode="decimal" placeholder="0" class="amount-input w-full text-3xl font-bold text-dark bg-transparent outline-none border-none" data-field="netAfterTax" />
+          </div>
+          <div class="text-xs text-gray-400 mt-1" id="sub-netAfterTax"></div>
+        </div>
+      </div>
+
+      <!-- Summary bar -->
+      <div class="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl border border-primary/10 p-5 mb-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div>
+            <div class="text-xs text-gray-500 mb-1">Employer charges</div>
+            <div class="text-lg font-bold text-red-600" id="sum-employer-charges">-</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 mb-1">RGDU reduction</div>
+            <div class="text-lg font-bold text-emerald-600" id="sum-rgdu">-</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 mb-1">Employee charges</div>
+            <div class="text-lg font-bold text-amber-600" id="sum-employee-charges">-</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500 mb-1">Income tax (PAS)</div>
+            <div class="text-lg font-bold text-blue-600" id="sum-pas">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed breakdown accordion -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-6">
+        <!-- Employer charges -->
+        <button type="button" class="accordion-toggle w-full flex items-center justify-between px-6 py-4 bg-gray-50 hover:bg-gray-100 transition text-left" data-target="breakdown-employer">
+          <span class="font-bold text-dark">Employer contributions (cotisations patronales)</span>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-bold text-red-600" id="acc-employer-total">-</span>
+            <svg class="w-5 h-5 text-gray-400 accordion-chevron transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </button>
+        <div id="breakdown-employer" class="hidden px-6 py-4 border-t border-gray-100">
+          <div id="breakdown-employer-lines" class="space-y-1.5 text-sm"></div>
+        </div>
+
+        <!-- RGDU -->
+        <button type="button" class="accordion-toggle w-full flex items-center justify-between px-6 py-4 bg-emerald-50/50 hover:bg-emerald-50 transition text-left border-t border-gray-100" data-target="breakdown-rgdu">
+          <span class="font-bold text-dark">RGDU reduction (réduction générale)</span>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-bold text-emerald-600" id="acc-rgdu-total">-</span>
+            <svg class="w-5 h-5 text-gray-400 accordion-chevron transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </button>
+        <div id="breakdown-rgdu" class="hidden px-6 py-4 border-t border-gray-100">
+          <div id="breakdown-rgdu-lines" class="space-y-1.5 text-sm"></div>
+        </div>
+
+        <!-- Employee charges -->
+        <button type="button" class="accordion-toggle w-full flex items-center justify-between px-6 py-4 bg-gray-50 hover:bg-gray-100 transition text-left border-t border-gray-100" data-target="breakdown-employee">
+          <span class="font-bold text-dark">Employee contributions (cotisations salariales)</span>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-bold text-amber-600" id="acc-employee-total">-</span>
+            <svg class="w-5 h-5 text-gray-400 accordion-chevron transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </button>
+        <div id="breakdown-employee" class="hidden px-6 py-4 border-t border-gray-100">
+          <div id="breakdown-employee-lines" class="space-y-1.5 text-sm"></div>
+        </div>
+
+        <!-- PAS -->
+        <button type="button" class="accordion-toggle w-full flex items-center justify-between px-6 py-4 bg-blue-50/50 hover:bg-blue-50 transition text-left border-t border-gray-100" data-target="breakdown-pas">
+          <span class="font-bold text-dark">Income tax at source (prélèvement à la source)</span>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-bold text-blue-600" id="acc-pas-total">-</span>
+            <svg class="w-5 h-5 text-gray-400 accordion-chevron transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </button>
+        <div id="breakdown-pas" class="hidden px-6 py-4 border-t border-gray-100">
+          <div id="breakdown-pas-lines" class="space-y-1.5 text-sm"></div>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-6">
         <div class="flex items-start gap-3">
           <svg class="w-6 h-6 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
           <div>
-            <h4 class="font-bold text-amber-800 mb-1">Important Notice</h4>
+            <h4 class="font-bold text-amber-800 mb-1">Indicative Estimates Only</h4>
             <p class="text-sm text-amber-700 leading-relaxed">
-              Rates are approximate averages for 2026. Actual charges depend on company size, industry, location, collective bargaining agreement, and applicable exemptions (e.g., <em>réduction générale de cotisations</em>). For precise calculations, <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
+              This simulator uses 2026 standard rates and the neutral PAS grid. Actual amounts depend on your collective bargaining agreement, local transport levy, specific AT/MP rate, applicable exemptions, and individual tax rate. The RGDU calculation is simplified and may differ from your actual payroll. For precise calculations tailored to your situation, <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="mt-8 prose prose-sm max-w-none text-gray-600">
-        <h2 class="text-xl font-bold text-dark">Understanding French Employer Costs</h2>
-        <p>In France, employer social charges (<em>cotisations patronales</em>) typically add <strong>40-45%</strong> on top of the gross salary. Key contributions include:</p>
-        <ul>
-          <li><strong>Health insurance</strong> (<em>maladie</em>): 7.00% (13% for salaries above 2.5 SMIC)</li>
-          <li><strong>Old-age pension</strong> (<em>vieillesse</em>): 8.55% (capped) + 2.02% (uncapped)</li>
-          <li><strong>Family allowances</strong> (<em>allocations familiales</em>): 3.45% (5.25% above 3.5 SMIC)</li>
-          <li><strong>Unemployment</strong> (<em>chômage</em>): 4.05%</li>
-          <li><strong>Complementary pension</strong> (AGIRC-ARRCO): 4.72% to 12.95%</li>
-          <li><strong>Work accident</strong> (<em>AT/MP</em>): variable by industry (avg ~2%)</li>
-        </ul>
-        <p>The PASS (Social Security ceiling) for 2026 is <strong>€48,060/year</strong> (€4,005/month).</p>
+      <!-- Explainer -->
+      <div class="prose prose-sm max-w-none text-gray-600">
+        <h2 class="text-xl font-bold text-dark">Understanding French Employer Costs in 2026</h2>
+        <p>In France, employer social charges (<em>cotisations patronales</em>) typically add <strong>40-50%</strong> on top of the gross salary. This simulator accounts for all mandatory contributions including health insurance, pensions (AGIRC-ARRCO), unemployment, family allowances, and the <em>réduction générale de cotisations</em> (RGDU) for salaries below 3x the minimum wage.</p>
+        <p>Key 2026 parameters: <strong>PASS</strong> = 48,060 EUR/year (4,005 EUR/month) &mdash; <strong>SMIC</strong> = 1,823.03 EUR/month gross (21,876.36 EUR/year).</p>
       </div>
     </div>
   </section>
@@ -117,71 +256,570 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <script>
-  document.getElementById('hiring-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const gross = parseFloat((document.getElementById('gross') as HTMLInputElement).value) || 0;
-    const status = (document.getElementById('status') as HTMLSelectElement).value;
-    const PASS = 48060;
-    const isCadre = status === 'cadre';
+  // ==========================================
+  // French Salary Simulator — 2026 Rates
+  // ==========================================
 
-    // Employer charges breakdown (approximate 2026 rates)
-    const charges: {label: string, rate: number, amount: number}[] = [];
+  // --- Constants ---
+  const PASS_ANNUAL = 48_060;
+  const PASS_MONTHLY = 4_005;
+  const SMIC_ANNUAL = 21_876.36;
+  const SMIC_MONTHLY = 1_823.03;
 
-    // Health insurance
-    const healthRate = gross > (21203 * 2.5) ? 0.13 : 0.07;
-    charges.push({label: `Health insurance (${(healthRate*100).toFixed(1)}%)`, rate: healthRate, amount: gross * healthRate});
+  // --- PAS neutral rate grid 2025 (valid until April 2026) ---
+  const PAS_GRID: [number, number][] = [
+    [1_591, 0],
+    [1_652, 0.005],
+    [1_758, 0.013],
+    [1_876, 0.021],
+    [2_005, 0.029],
+    [2_112, 0.035],
+    [2_252, 0.041],
+    [2_665, 0.053],
+    [3_051, 0.075],
+    [3_475, 0.099],
+    [3_912, 0.119],
+    [4_565, 0.138],
+    [5_474, 0.158],
+    [6_850, 0.179],
+    [8_556, 0.20],
+    [11_876, 0.24],
+    [16_085, 0.28],
+    [25_250, 0.33],
+    [54_087, 0.38],
+    [Infinity, 0.43],
+  ];
 
-    // Old-age pension (capped at PASS)
-    const vieillessePlaf = Math.min(gross, PASS) * 0.0855;
-    charges.push({label: 'Old-age pension capped (8.55%)', rate: 0.0855, amount: vieillessePlaf});
-    const vieillesseDepl = gross * 0.0202;
-    charges.push({label: 'Old-age pension uncapped (2.02%)', rate: 0.0202, amount: vieillesseDepl});
-
-    // Family allowances
-    const famRate = gross > (21203 * 3.5) ? 0.0525 : 0.0345;
-    charges.push({label: `Family allowances (${(famRate*100).toFixed(2)}%)`, rate: famRate, amount: gross * famRate});
-
-    // Unemployment
-    charges.push({label: 'Unemployment (4.05%)', rate: 0.0405, amount: gross * 0.0405});
-
-    // AGIRC-ARRCO T1
-    const t1 = Math.min(gross, PASS);
-    charges.push({label: 'AGIRC-ARRCO T1 (4.72%)', rate: 0.0472, amount: t1 * 0.0472});
-
-    // AGIRC-ARRCO T2 (cadre only, above PASS)
-    if (isCadre && gross > PASS) {
-      const t2 = gross - PASS;
-      charges.push({label: 'AGIRC-ARRCO T2 (12.95%)', rate: 0.1295, amount: t2 * 0.1295});
+  function getPASRate(netImposableMensuel: number): number {
+    for (const [threshold, rate] of PAS_GRID) {
+      if (netImposableMensuel < threshold) return rate;
     }
+    return 0.43;
+  }
 
-    // Work accident (average)
-    charges.push({label: 'Work accident AT/MP (~2.0%)', rate: 0.02, amount: gross * 0.02});
+  // --- State ---
+  let currentPeriod: 'monthly' | 'annual' = 'monthly';
+  let activeField: string = 'gross';
+  let isUpdating = false;
 
-    // AGS
-    charges.push({label: 'AGS (0.20%)', rate: 0.002, amount: Math.min(gross, PASS * 4) * 0.002});
+  // --- Helpers ---
+  function getOpts() {
+    const isCadre = (document.getElementById('opt-status') as HTMLSelectElement).value === 'cadre';
+    const isLarge = (document.getElementById('opt-size') as HTMLSelectElement).value === 'large';
+    const isCDD = (document.getElementById('opt-contract') as HTMLSelectElement).value === 'cdd';
+    const atmpRate = parseFloat((document.getElementById('opt-atmp') as HTMLInputElement).value) / 100 || 0.02;
+    const vmRate = parseFloat((document.getElementById('opt-vm') as HTMLInputElement).value) / 100 || 0.02;
+    const isLargeHeadcount = (document.getElementById('opt-headcount') as HTMLSelectElement).value === 'large';
+    return { isCadre, isLarge, isCDD, atmpRate, vmRate, isLargeHeadcount };
+  }
+
+  function fmt(n: number): string {
+    return n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function fmtShort(n: number): string {
+    return n.toLocaleString('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  }
+
+  function parseAmount(s: string): number {
+    // Accept French formatting: "4 000,50" or "4000.50" or "4000,50"
+    const cleaned = s.replace(/\s/g, '').replace(',', '.');
+    return parseFloat(cleaned) || 0;
+  }
+
+  function formatInput(n: number): string {
+    if (n === 0) return '';
+    return fmt(n);
+  }
+
+  // --- Core calculation: from annual gross ---
+  interface CalcResult {
+    grossAnnual: number;
+    employerCharges: { label: string; base: string; rate: number; amount: number }[];
+    totalEmployerCharges: number;
+    rgduAmount: number;
+    rgduDetails: string[];
+    totalEmployerCost: number;
+    employeeCharges: { label: string; base: string; rate: number; amount: number }[];
+    totalEmployeeCharges: number;
+    netBeforeTax: number;
+    netImposable: number;
+    pasRate: number;
+    pasAmount: number;
+    netAfterTax: number;
+  }
+
+  function fromGross(grossAnnual: number): CalcResult {
+    const opts = getOpts();
+    const g = grossAnnual;
+    const pmss = PASS_ANNUAL;
+    const pmss4 = pmss * 4;
+    const pmss8 = pmss * 8;
+
+    // --- Employer contributions ---
+    const ec: { label: string; base: string; rate: number; amount: number }[] = [];
+
+    // Assurance maladie
+    ec.push({ label: 'Health insurance (maladie)', base: 'Total', rate: 0.13, amount: g * 0.13 });
+
+    // Vieillesse plafonnée
+    const vp = Math.min(g, pmss);
+    ec.push({ label: 'Old-age pension capped (vieillesse plaf.)', base: '0-1 PMSS', rate: 0.0855, amount: vp * 0.0855 });
+
+    // Vieillesse déplafonnée
+    ec.push({ label: 'Old-age pension uncapped (vieillesse déplaf.)', base: 'Total', rate: 0.0211, amount: g * 0.0211 });
+
+    // Allocations familiales
+    ec.push({ label: 'Family allowances (alloc. familiales)', base: 'Total', rate: 0.0525, amount: g * 0.0525 });
+
+    // CSA
+    ec.push({ label: 'Solidarity autonomy (CSA)', base: 'Total', rate: 0.003, amount: g * 0.003 });
+
+    // AT/MP
+    ec.push({ label: 'Work accident (AT/MP)', base: 'Total', rate: opts.atmpRate, amount: g * opts.atmpRate });
 
     // FNAL
-    charges.push({label: 'FNAL (0.50%)', rate: 0.005, amount: gross * 0.005});
+    if (opts.isLarge) {
+      ec.push({ label: 'FNAL (>= 50 sal.)', base: 'Total', rate: 0.005, amount: g * 0.005 });
+    } else {
+      ec.push({ label: 'FNAL (< 50 sal.)', base: '0-1 PMSS', rate: 0.001, amount: vp * 0.001 });
+    }
 
-    // Versement mobilité (average)
-    charges.push({label: 'Transport levy (~2.0%)', rate: 0.02, amount: gross * 0.02});
+    // Chômage
+    const chomageBase = Math.min(g, pmss4);
+    ec.push({ label: 'Unemployment (chômage)', base: '0-4 PMSS', rate: 0.04, amount: chomageBase * 0.04 });
 
-    // Formation
-    charges.push({label: 'Training contribution (1.0%)', rate: 0.01, amount: gross * 0.01});
+    // AGS
+    ec.push({ label: 'Wage guarantee (AGS)', base: '0-4 PMSS', rate: 0.0025, amount: chomageBase * 0.0025 });
 
-    const totalCharges = charges.reduce((sum, c) => sum + c.amount, 0);
-    const totalCost = gross + totalCharges;
-    const estimatedNet = gross * (isCadre ? 0.75 : 0.78);
+    // AGIRC-ARRCO T1
+    const t1 = Math.min(g, pmss);
+    ec.push({ label: 'AGIRC-ARRCO T1', base: '0-1 PMSS', rate: 0.0472, amount: t1 * 0.0472 });
 
-    const fmt = (n: number) => `€${n.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+    // AGIRC-ARRCO T2 (cadres only, above PMSS)
+    if (opts.isCadre) {
+      const t2 = Math.max(0, Math.min(g, pmss8) - pmss);
+      if (t2 > 0) {
+        ec.push({ label: 'AGIRC-ARRCO T2', base: '1-8 PMSS', rate: 0.1295, amount: t2 * 0.1295 });
+      }
+    }
 
-    document.getElementById('r-gross')!.textContent = fmt(gross);
-    document.getElementById('r-charges')!.textContent = fmt(totalCharges);
-    document.getElementById('r-net')!.textContent = `~${fmt(estimatedNet)}`;
-    document.getElementById('r-total')!.textContent = fmt(totalCost);
-    document.getElementById('r-breakdown')!.innerHTML = charges.map(c =>
-      `<div class="flex justify-between"><span>${c.label}</span><span class="font-medium">${fmt(c.amount)}</span></div>`
+    // CEG T1
+    ec.push({ label: 'CEG T1', base: '0-1 PMSS', rate: 0.0129, amount: t1 * 0.0129 });
+
+    // CEG T2
+    if (opts.isCadre) {
+      const ceg2Base = Math.max(0, Math.min(g, pmss8) - pmss);
+      if (ceg2Base > 0) {
+        ec.push({ label: 'CEG T2', base: '1-8 PMSS', rate: 0.0162, amount: ceg2Base * 0.0162 });
+      }
+    }
+
+    // CET (if salary > 1 PMSS)
+    if (g > pmss) {
+      ec.push({ label: 'CET', base: 'Total', rate: 0.0021, amount: g * 0.0021 });
+    }
+
+    // APEC (cadres only)
+    if (opts.isCadre) {
+      const apecBase = Math.min(g, pmss4);
+      ec.push({ label: 'APEC', base: '0-4 PMSS', rate: 0.00036, amount: apecBase * 0.00036 });
+    }
+
+    // Formation professionnelle
+    const formRate = opts.isLargeHeadcount ? 0.01 : 0.0055;
+    ec.push({ label: `Training (formation pro ${opts.isLargeHeadcount ? '>= 11' : '< 11'} sal.)`, base: 'Total', rate: formRate, amount: g * formRate });
+
+    // Taxe d'apprentissage
+    ec.push({ label: 'Apprenticeship tax (taxe apprentissage)', base: 'Total', rate: 0.0068, amount: g * 0.0068 });
+
+    // Versement mobilité
+    if (opts.vmRate > 0) {
+      ec.push({ label: 'Transport levy (versement mobilité)', base: 'Total', rate: opts.vmRate, amount: g * opts.vmRate });
+    }
+
+    // Dialogue social
+    ec.push({ label: 'Social dialogue (dialogue social)', base: 'Total', rate: 0.00016, amount: g * 0.00016 });
+
+    // Prévoyance cadre
+    const prevoyanceEmployer = opts.isCadre ? t1 * 0.015 : 0;
+    if (opts.isCadre) {
+      ec.push({ label: 'Executive death/disability (prévoyance cadre)', base: '0-1 PMSS', rate: 0.015, amount: prevoyanceEmployer });
+    }
+
+    // Mutuelle patronale (estimate)
+    const mutuelleEmployer = g * 0.01;
+    ec.push({ label: 'Health insurance complement (mutuelle empl.)', base: 'Estimate', rate: 0.01, amount: mutuelleEmployer });
+
+    // CDD: prime de précarité 10% counted separately (not a cotisation)
+    // No additional employer cotisation for CDD per se, but let's keep it simple
+
+    const totalEmployerCharges = ec.reduce((s, c) => s + c.amount, 0);
+
+    // --- RGDU ---
+    let rgduAmount = 0;
+    const rgduDetails: string[] = [];
+    if (g > 0 && g < 3 * SMIC_ANNUAL) {
+      const Tmin = 0.0200;
+      const Tdelta = opts.isLarge ? 0.3821 : 0.3781;
+      const P = 1.75;
+      const ratio = SMIC_ANNUAL / g;
+      const inside = 0.5 * (3 * ratio - 1);
+      if (inside > 0) {
+        const C = Tmin + Tdelta * Math.pow(inside, P);
+        // C is capped at Tmin + Tdelta
+        const Ceff = Math.min(C, Tmin + Tdelta);
+        rgduAmount = Ceff * g;
+        rgduDetails.push(`Annual gross: ${fmt(g)} EUR`);
+        rgduDetails.push(`3 x SMIC annual: ${fmt(3 * SMIC_ANNUAL)} EUR`);
+        rgduDetails.push(`Ratio factor: (1/2) x (3 x ${fmt(SMIC_ANNUAL)} / ${fmt(g)} - 1) = ${inside.toFixed(6)}`);
+        rgduDetails.push(`C = ${Tmin} + ${Tdelta} x ${inside.toFixed(6)}^${P} = ${Ceff.toFixed(6)}`);
+        rgduDetails.push(`RGDU = ${Ceff.toFixed(6)} x ${fmt(g)} = ${fmt(rgduAmount)} EUR`);
+      }
+    } else {
+      rgduDetails.push('Not eligible: gross salary >= 3x SMIC annual (' + fmt(3 * SMIC_ANNUAL) + ' EUR)');
+    }
+
+    const totalEmployerCost = g + totalEmployerCharges - rgduAmount;
+
+    // --- Employee contributions ---
+    const sc: { label: string; base: string; rate: number; amount: number }[] = [];
+
+    // Vieillesse plafonnée
+    sc.push({ label: 'Old-age pension capped (vieillesse plaf.)', base: '0-1 PMSS', rate: 0.069, amount: vp * 0.069 });
+
+    // Vieillesse déplafonnée
+    sc.push({ label: 'Old-age pension uncapped (vieillesse déplaf.)', base: 'Total', rate: 0.004, amount: g * 0.004 });
+
+    // AGIRC-ARRCO T1
+    sc.push({ label: 'AGIRC-ARRCO T1', base: '0-1 PMSS', rate: 0.0315, amount: t1 * 0.0315 });
+
+    // AGIRC-ARRCO T2
+    if (opts.isCadre) {
+      const t2s = Math.max(0, Math.min(g, pmss8) - pmss);
+      if (t2s > 0) {
+        sc.push({ label: 'AGIRC-ARRCO T2', base: '1-8 PMSS', rate: 0.0864, amount: t2s * 0.0864 });
+      }
+    }
+
+    // CEG T1
+    sc.push({ label: 'CEG T1', base: '0-1 PMSS', rate: 0.0086, amount: t1 * 0.0086 });
+
+    // CEG T2
+    if (opts.isCadre) {
+      const ceg2s = Math.max(0, Math.min(g, pmss8) - pmss);
+      if (ceg2s > 0) {
+        sc.push({ label: 'CEG T2', base: '1-8 PMSS', rate: 0.0108, amount: ceg2s * 0.0108 });
+      }
+    }
+
+    // CET
+    if (g > pmss) {
+      sc.push({ label: 'CET', base: 'Total', rate: 0.0014, amount: g * 0.0014 });
+    }
+
+    // APEC (cadres)
+    if (opts.isCadre) {
+      const apecBaseS = Math.min(g, pmss4);
+      sc.push({ label: 'APEC', base: '0-4 PMSS', rate: 0.00024, amount: apecBaseS * 0.00024 });
+    }
+
+    // Mutuelle salariale (estimate)
+    const mutuelleSal = g * 0.01;
+    sc.push({ label: 'Health insurance complement (mutuelle sal.)', base: 'Estimate', rate: 0.01, amount: mutuelleSal });
+
+    // CSG / CRDS — base = 98.25% of gross + employer prévoyance + employer mutuelle
+    const csgBase = g * 0.9825 + prevoyanceEmployer + mutuelleEmployer;
+    const csgAmount = csgBase * 0.092;
+    const crdsAmount = csgBase * 0.005;
+    sc.push({ label: 'CSG (9.20%)', base: '98.25% gross + prev/mut', rate: 0.092, amount: csgAmount });
+    sc.push({ label: 'CRDS (0.50%)', base: '98.25% gross + prev/mut', rate: 0.005, amount: crdsAmount });
+
+    const totalEmployeeCharges = sc.reduce((s, c) => s + c.amount, 0);
+    const netBeforeTax = g - totalEmployeeCharges;
+
+    // --- Net imposable ---
+    // Net imposable = net before tax + non-deductible CSG (2.4%) + CRDS (0.5%)
+    const csgNonDeductible = csgBase * 0.024;
+    const netImposable = netBeforeTax + csgNonDeductible + crdsAmount;
+
+    // --- PAS ---
+    const netImposableMensuel = netImposable / 12;
+    const pasRate = getPASRate(netImposableMensuel);
+    const pasAmount = netImposable * pasRate;
+    const netAfterTax = netBeforeTax - pasAmount;
+
+    return {
+      grossAnnual: g,
+      employerCharges: ec,
+      totalEmployerCharges,
+      rgduAmount,
+      rgduDetails,
+      totalEmployerCost,
+      employeeCharges: sc,
+      totalEmployeeCharges,
+      netBeforeTax,
+      netImposable,
+      pasRate,
+      pasAmount,
+      netAfterTax,
+    };
+  }
+
+  // --- Reverse calculations using bisection ---
+  function fromEmployerCost(targetAnnual: number): number {
+    // Find grossAnnual such that fromGross(grossAnnual).totalEmployerCost === targetAnnual
+    let lo = 0, hi = targetAnnual * 2;
+    for (let i = 0; i < 100; i++) {
+      const mid = (lo + hi) / 2;
+      const r = fromGross(mid);
+      if (r.totalEmployerCost < targetAnnual) lo = mid;
+      else hi = mid;
+      if (Math.abs(r.totalEmployerCost - targetAnnual) < 0.01) break;
+    }
+    return (lo + hi) / 2;
+  }
+
+  function fromNetBeforeTax(targetAnnual: number): number {
+    let lo = 0, hi = targetAnnual * 3;
+    for (let i = 0; i < 100; i++) {
+      const mid = (lo + hi) / 2;
+      const r = fromGross(mid);
+      if (r.netBeforeTax < targetAnnual) lo = mid;
+      else hi = mid;
+      if (Math.abs(r.netBeforeTax - targetAnnual) < 0.01) break;
+    }
+    return (lo + hi) / 2;
+  }
+
+  function fromNetAfterTax(targetAnnual: number): number {
+    let lo = 0, hi = targetAnnual * 4;
+    for (let i = 0; i < 100; i++) {
+      const mid = (lo + hi) / 2;
+      const r = fromGross(mid);
+      if (r.netAfterTax < targetAnnual) lo = mid;
+      else hi = mid;
+      if (Math.abs(r.netAfterTax - targetAnnual) < 0.01) break;
+    }
+    return (lo + hi) / 2;
+  }
+
+  // --- Display ---
+  function displayResults(result: CalcResult) {
+    const div = currentPeriod === 'monthly' ? 12 : 1;
+    const periodLabel = currentPeriod === 'monthly' ? '/mo' : '/yr';
+
+    // Set values in non-active fields
+    const fields = ['employer', 'gross', 'netBeforeTax', 'netAfterTax'];
+    const values: Record<string, number> = {
+      employer: result.totalEmployerCost / div,
+      gross: result.grossAnnual / div,
+      netBeforeTax: result.netBeforeTax / div,
+      netAfterTax: result.netAfterTax / div,
+    };
+
+    for (const f of fields) {
+      if (f !== activeField) {
+        (document.getElementById(`val-${f}`) as HTMLInputElement).value = formatInput(values[f]);
+      }
+    }
+
+    // Sub-labels: show the other period
+    const otherDiv = currentPeriod === 'monthly' ? 1 : 12;
+    const otherLabel = currentPeriod === 'monthly' ? '/yr' : '/mo';
+    document.getElementById('sub-employer')!.textContent = `${fmt(result.totalEmployerCost / otherDiv)} EUR ${otherLabel}`;
+    document.getElementById('sub-gross')!.textContent = `${fmt(result.grossAnnual / otherDiv)} EUR ${otherLabel}`;
+    document.getElementById('sub-netBeforeTax')!.textContent = `${fmt(result.netBeforeTax / otherDiv)} EUR ${otherLabel}`;
+    document.getElementById('sub-netAfterTax')!.textContent = `${fmt(result.netAfterTax / otherDiv)} EUR ${otherLabel}`;
+
+    // Summary bar
+    document.getElementById('sum-employer-charges')!.textContent = `${fmt(result.totalEmployerCharges / div)} EUR`;
+    document.getElementById('sum-rgdu')!.textContent = result.rgduAmount > 0 ? `-${fmt(result.rgduAmount / div)} EUR` : '-';
+    document.getElementById('sum-employee-charges')!.textContent = `${fmt(result.totalEmployeeCharges / div)} EUR`;
+    document.getElementById('sum-pas')!.textContent = `${fmt(result.pasAmount / div)} EUR (${(result.pasRate * 100).toFixed(1)}%)`;
+
+    // Accordion totals
+    document.getElementById('acc-employer-total')!.textContent = `${fmt(result.totalEmployerCharges / div)} EUR`;
+    document.getElementById('acc-rgdu-total')!.textContent = result.rgduAmount > 0 ? `-${fmt(result.rgduAmount / div)} EUR` : 'N/A';
+    document.getElementById('acc-employee-total')!.textContent = `${fmt(result.totalEmployeeCharges / div)} EUR`;
+    document.getElementById('acc-pas-total')!.textContent = `${fmt(result.pasAmount / div)} EUR`;
+
+    // Breakdown: employer
+    document.getElementById('breakdown-employer-lines')!.innerHTML = result.employerCharges.map(c =>
+      `<div class="flex justify-between items-center py-1 border-b border-gray-50 last:border-0">
+        <div><span class="text-gray-700">${c.label}</span> <span class="text-gray-400 text-xs ml-1">(${c.base})</span></div>
+        <div class="text-right"><span class="text-gray-400 text-xs mr-2">${(c.rate * 100).toFixed(3)}%</span><span class="font-medium text-dark">${fmt(c.amount / div)} EUR</span></div>
+      </div>`
     ).join('');
-    document.getElementById('result')!.classList.remove('hidden');
+
+    // Breakdown: RGDU
+    document.getElementById('breakdown-rgdu-lines')!.innerHTML = result.rgduDetails.map(d =>
+      `<div class="text-gray-600">${d}</div>`
+    ).join('');
+
+    // Breakdown: employee
+    document.getElementById('breakdown-employee-lines')!.innerHTML = result.employeeCharges.map(c =>
+      `<div class="flex justify-between items-center py-1 border-b border-gray-50 last:border-0">
+        <div><span class="text-gray-700">${c.label}</span> <span class="text-gray-400 text-xs ml-1">(${c.base})</span></div>
+        <div class="text-right"><span class="text-gray-400 text-xs mr-2">${(c.rate * 100).toFixed(3)}%</span><span class="font-medium text-dark">${fmt(c.amount / div)} EUR</span></div>
+      </div>`
+    ).join('');
+
+    // Breakdown: PAS
+    document.getElementById('breakdown-pas-lines')!.innerHTML = `
+      <div class="flex justify-between py-1 border-b border-gray-50"><span class="text-gray-700">Net imposable ${currentPeriod === 'monthly' ? '(monthly)' : '(annual)'}</span><span class="font-medium text-dark">${fmt(result.netImposable / div)} EUR</span></div>
+      <div class="flex justify-between py-1 border-b border-gray-50"><span class="text-gray-700">Net imposable (monthly, for grid)</span><span class="font-medium text-dark">${fmt(result.netImposable / 12)} EUR</span></div>
+      <div class="flex justify-between py-1 border-b border-gray-50"><span class="text-gray-700">Neutral PAS rate applied</span><span class="font-medium text-dark">${(result.pasRate * 100).toFixed(1)}%</span></div>
+      <div class="flex justify-between py-1"><span class="text-gray-700">PAS amount ${periodLabel}</span><span class="font-bold text-blue-600">${fmt(result.pasAmount / div)} EUR</span></div>
+    `;
+  }
+
+  // --- Main update function ---
+  function update(source: string) {
+    if (isUpdating) return;
+    isUpdating = true;
+    activeField = source;
+
+    const rawVal = parseAmount((document.getElementById(`val-${source}`) as HTMLInputElement).value);
+    const multiplier = currentPeriod === 'monthly' ? 12 : 1;
+    const annualInput = rawVal * multiplier;
+
+    let grossAnnual: number;
+    switch (source) {
+      case 'employer':
+        grossAnnual = annualInput > 0 ? fromEmployerCost(annualInput) : 0;
+        break;
+      case 'gross':
+        grossAnnual = annualInput;
+        break;
+      case 'netBeforeTax':
+        grossAnnual = annualInput > 0 ? fromNetBeforeTax(annualInput) : 0;
+        break;
+      case 'netAfterTax':
+        grossAnnual = annualInput > 0 ? fromNetAfterTax(annualInput) : 0;
+        break;
+      default:
+        grossAnnual = 0;
+    }
+
+    if (grossAnnual > 0) {
+      const result = fromGross(grossAnnual);
+      displayResults(result);
+    }
+
+    // Highlight active card
+    document.querySelectorAll('.amount-card').forEach(card => {
+      const field = (card as HTMLElement).dataset.field;
+      if (field === source) {
+        card.classList.remove('border-gray-100');
+        card.classList.add('border-primary/40');
+      } else {
+        card.classList.remove('border-primary/40');
+        card.classList.add('border-gray-100');
+      }
+    });
+
+    isUpdating = false;
+  }
+
+  // --- Event bindings ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Amount inputs: update on input
+    document.querySelectorAll('.amount-input').forEach(input => {
+      const field = (input as HTMLElement).dataset.field!;
+
+      input.addEventListener('input', () => {
+        update(field);
+      });
+
+      input.addEventListener('focus', () => {
+        activeField = field;
+        // Highlight
+        document.querySelectorAll('.amount-card').forEach(card => {
+          const cf = (card as HTMLElement).dataset.field;
+          if (cf === field) {
+            card.classList.remove('border-gray-100');
+            card.classList.add('border-primary/40');
+          } else {
+            card.classList.remove('border-primary/40');
+            card.classList.add('border-gray-100');
+          }
+        });
+      });
+
+      // Format on blur
+      input.addEventListener('blur', () => {
+        const val = parseAmount((input as HTMLInputElement).value);
+        if (val > 0) {
+          (input as HTMLInputElement).value = formatInput(val);
+        }
+      });
+    });
+
+    // Period toggle
+    document.querySelectorAll('.period-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const newPeriod = (btn as HTMLElement).dataset.period as 'monthly' | 'annual';
+        if (newPeriod === currentPeriod) return;
+
+        // Convert the current active field value to the new period
+        const activeInput = document.getElementById(`val-${activeField}`) as HTMLInputElement;
+        const currentVal = parseAmount(activeInput.value);
+
+        if (currentVal > 0) {
+          let newVal: number;
+          if (currentPeriod === 'monthly' && newPeriod === 'annual') {
+            newVal = currentVal * 12;
+          } else {
+            newVal = currentVal / 12;
+          }
+          activeInput.value = formatInput(newVal);
+        }
+
+        currentPeriod = newPeriod;
+
+        // Update button styles
+        document.querySelectorAll('.period-btn').forEach(b => {
+          if ((b as HTMLElement).dataset.period === currentPeriod) {
+            b.classList.add('bg-primary', 'text-white');
+            b.classList.remove('bg-white', 'text-gray-600');
+          } else {
+            b.classList.remove('bg-primary', 'text-white');
+            b.classList.add('bg-white', 'text-gray-600');
+          }
+        });
+
+        update(activeField);
+      });
+    });
+
+    // Options change: recalculate
+    ['opt-status', 'opt-size', 'opt-contract', 'opt-atmp', 'opt-vm', 'opt-headcount'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('change', () => update(activeField));
+        el.addEventListener('input', () => update(activeField));
+      }
+    });
+
+    // Accordion toggles
+    document.querySelectorAll('.accordion-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = (btn as HTMLElement).dataset.target!;
+        const target = document.getElementById(targetId)!;
+        const chevron = btn.querySelector('.accordion-chevron') as HTMLElement;
+        target.classList.toggle('hidden');
+        if (target.classList.contains('hidden')) {
+          chevron.style.transform = '';
+        } else {
+          chevron.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+
+    // Set default value and trigger initial calc
+    const grossInput = document.getElementById('val-gross') as HTMLInputElement;
+    grossInput.value = formatInput(4000);
+    update('gross');
   });
 </script>

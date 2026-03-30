@@ -3,11 +3,30 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Mutual Termination Calculator — France | DAIRIA Law"
-  description="Calculate the minimum rupture conventionnelle indemnity under French law. Free calculator for employers planning a mutual termination. Updated 2026."
+  title="Mutual Termination Calculator — Rupture Conventionnelle | DAIRIA Law"
+  description="Calculate the minimum rupture conventionnelle indemnity, tax regime, social charges, timeline and key dates. Based on Articles L.1237-11 to L.1237-16 of the French Labour Code. Updated 2026."
   lang="en"
   canonicalPath="/simulators/mutual-termination"
 >
+  <!-- JSON-LD -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Mutual Termination Calculator — France",
+      "url": "https://dairia-law.com/simulators/mutual-termination",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "provider": {
+        "@type": "LegalService",
+        "name": "DAIRIA Law",
+        "url": "https://dairia-law.com"
+      }
+    })} />
+  </Fragment>
+
+  <!-- HERO -->
   <section class="relative bg-gradient-to-br from-dark via-primary to-primary/80 text-white section-padding overflow-hidden">
     <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIuMDUiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-30"></div>
     <div class="container-narrow relative">
@@ -16,100 +35,338 @@ import Layout from '../../layouts/Layout.astro';
         Back to Calculators
       </a>
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-        Mutual Termination <span class="text-accent">Calculator</span>
+        Rupture Conventionnelle <span class="text-accent">Calculator</span>
       </h1>
       <p class="text-lg text-white/80 max-w-2xl">
-        Estimate the minimum indemnity for a <em>rupture conventionnelle</em> — the negotiated mutual termination of an employment contract under French law (art. L.1237-13 Code du travail).
+        Estimate the minimum indemnity, tax &amp; social regime, key dates and timeline for a <em>rupture conventionnelle</em> under French law (Articles L.1237-11 to L.1237-16, Code du travail).
       </p>
     </div>
   </section>
 
+  <!-- CALCULATOR -->
   <section class="section-padding">
-    <div class="container-narrow max-w-2xl mx-auto">
-      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
-        <form id="rupture-form" class="space-y-6">
-          <div>
-            <label class="block text-sm font-semibold text-dark mb-2">Monthly Gross Salary (€)</label>
-            <input type="number" id="salary" placeholder="e.g. 4000" min="0" step="100"
-              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
-            <p class="text-xs text-gray-500 mt-1">Reference salary: same rules as severance pay (best of last 12 or last 3 months average).</p>
-          </div>
+    <div class="container-narrow max-w-3xl mx-auto">
 
+      <!-- STEP 1: Contract dates -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-6">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">1</div>
+          <h2 class="text-lg font-bold text-dark">Employment Details</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-semibold text-dark mb-2">Years of Service</label>
-            <input type="number" id="years" placeholder="e.g. 5" min="0" max="50" step="1"
+            <label class="block text-sm font-semibold text-dark mb-2" for="date-start">Start date of employment</label>
+            <input type="date" id="date-start"
               class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
           </div>
-
           <div>
-            <label class="block text-sm font-semibold text-dark mb-2">Additional Months</label>
-            <input type="number" id="months" placeholder="e.g. 6" min="0" max="11" step="1" value="0"
+            <label class="block text-sm font-semibold text-dark mb-2" for="date-end">Expected termination date</label>
+            <input type="date" id="date-end"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" required />
+            <p class="text-xs text-gray-400 mt-1">Must be at least ~35 days after signing (retraction + DREETS review)</p>
+          </div>
+        </div>
+        <div id="seniority-display" class="mt-4 hidden">
+          <div class="flex items-center gap-2 text-sm">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-600">Seniority: <strong id="seniority-text" class="text-dark"></strong></span>
+          </div>
+          <div id="seniority-warning" class="hidden mt-2 text-sm text-amber-700 bg-amber-50 rounded-lg px-3 py-2">
+            <strong>Warning:</strong> Less than 8 months of seniority. The employee may not be entitled to the legal minimum severance indemnity (art. L.1234-9).
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Reference salary -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-6">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">2</div>
+          <h2 class="text-lg font-bold text-dark">Reference Salary</h2>
+        </div>
+        <p class="text-sm text-gray-500 mb-4">
+          French law (art. R.1234-4) uses the <strong>most favourable</strong> of two methods. Enter both to compare.
+        </p>
+
+        <!-- Method A: 12-month average -->
+        <div class="mb-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded">Method A</span>
+            <span class="text-sm font-semibold text-dark">Average of last 12 months gross salary</span>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="months-12-grid">
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 1</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="1" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 2</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="2" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 3</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="3" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 4</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="4" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 5</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="5" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 6</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="6" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 7</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="7" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 8</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="8" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 9</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="9" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 10</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="10" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 11</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="11" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month 12</label>
+              <input type="number" class="month-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" data-month="12" />
+            </div>
+          </div>
+          <div class="flex items-center justify-between mt-3">
+            <button type="button" id="fill-all-btn" class="text-xs text-primary hover:text-primary/80 font-medium underline">Fill all months with same amount</button>
+            <span class="text-sm text-gray-500">Average: <strong id="avg-12" class="text-dark">-</strong></span>
+          </div>
+        </div>
+
+        <!-- Method B: 1/3 of last 3 months -->
+        <div class="mb-6 border-t border-gray-100 pt-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2 py-0.5 rounded">Method B</span>
+            <span class="text-sm font-semibold text-dark">1/3 of last 3 months gross salary</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-3">Annual bonuses (e.g. 13th month) must be prorated: add 1/12 of the annual bonus to each month.</p>
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month M-3</label>
+              <input type="number" id="m3-1" class="last3-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month M-2</label>
+              <input type="number" id="m3-2" class="last3-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Month M-1</label>
+              <input type="number" id="m3-3" class="last3-input w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none text-sm text-dark" placeholder="0" min="0" step="100" />
+            </div>
+          </div>
+          <div class="text-right mt-2">
+            <span class="text-sm text-gray-500">1/3 average: <strong id="avg-3" class="text-dark">-</strong></span>
+          </div>
+        </div>
+
+        <!-- Shortcut: single salary -->
+        <div class="border-t border-gray-100 pt-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500 bg-gray-100 px-2 py-0.5 rounded">Quick mode</span>
+            <span class="text-sm font-semibold text-dark">Or just enter a single monthly salary</span>
+          </div>
+          <div class="flex gap-3 items-end">
+            <div class="flex-1">
+              <input type="number" id="quick-salary" placeholder="e.g. 4000" min="0" step="100"
+                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" />
+            </div>
+            <button type="button" id="quick-fill-btn" class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-dark font-semibold rounded-lg transition text-sm">
+              Apply to all fields
+            </button>
+          </div>
+        </div>
+
+        <!-- Reference salary result -->
+        <div id="ref-salary-result" class="hidden mt-6 p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-semibold text-dark">Reference salary retained:</span>
+            <span class="text-xl font-bold text-primary" id="ref-salary-value">-</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-1" id="ref-salary-method"></p>
+        </div>
+      </div>
+
+      <!-- STEP 3: Additional options -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-6">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">3</div>
+          <h2 class="text-lg font-bold text-dark">Additional Information</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Can the employee claim retirement?</label>
+            <select id="retirement-eligible"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark">
+              <option value="no">No (favourable tax regime)</option>
+              <option value="yes">Yes (fully taxed)</option>
+            </select>
+            <p class="text-xs text-gray-400 mt-1">If the employee can claim a pension, the indemnity is fully subject to income tax and social charges.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Annual gross remuneration (year N-1)</label>
+            <input type="number" id="annual-remun" placeholder="e.g. 48000" min="0" step="1000"
               class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" />
+            <p class="text-xs text-gray-400 mt-1">Used to calculate the tax exemption ceiling (2x annual gross N-1).</p>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-dark mb-2">Signing date (optional)</label>
+            <input type="date" id="date-signing"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition text-dark" />
+            <p class="text-xs text-gray-400 mt-1">To calculate the timeline (retraction + DREETS review).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALCULATE BUTTON -->
+      <button type="button" id="calculate-btn"
+        class="w-full bg-accent text-white font-bold py-4 rounded-xl hover:bg-orange-600 transition shadow-lg hover:shadow-xl text-lg mb-8">
+        Calculate Indemnity &amp; Timeline
+      </button>
+
+      <!-- RESULTS -->
+      <div id="results" class="hidden space-y-6">
+        <!-- Main result -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+          <h3 class="text-lg font-bold text-dark mb-6">Minimum Indemnity</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-5 text-center border border-primary/20">
+              <div class="text-sm text-gray-500 mb-1">Legal minimum</div>
+              <div class="text-3xl font-bold text-primary" id="r-legal">-</div>
+              <div class="text-xs text-gray-400 mt-1">art. R.1234-2</div>
+            </div>
+            <div class="bg-gradient-to-br from-accent/10 to-accent/5 rounded-xl p-5 text-center border border-accent/20">
+              <div class="text-sm text-gray-500 mb-1">Typical negotiated</div>
+              <div class="text-xl font-bold text-accent" id="r-negotiated">-</div>
+              <div class="text-xs text-gray-400 mt-1">1.5x to 3x legal</div>
+            </div>
+            <div class="bg-gradient-to-br from-gray-100 to-gray-50 rounded-xl p-5 text-center border border-gray-200">
+              <div class="text-sm text-gray-500 mb-1">Reference salary</div>
+              <div class="text-xl font-bold text-dark" id="r-ref-salary">-</div>
+              <div class="text-xs text-gray-400 mt-1" id="r-ref-method">-</div>
+            </div>
           </div>
 
-          <button type="submit"
-            class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:bg-orange-600 transition shadow-sm hover:shadow-md">
-            Calculate Minimum Indemnity
-          </button>
-        </form>
-
-        <div id="result" class="hidden mt-8 p-6 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
-          <h3 class="text-lg font-bold text-dark mb-4">Rupture Conventionnelle — Minimum Indemnity</h3>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="bg-white rounded-lg p-4 border border-primary/20 text-center">
-              <div class="text-sm text-gray-500">Legal Minimum</div>
-              <div class="text-3xl font-bold text-primary" id="r-legal">€0</div>
-            </div>
-            <div class="bg-white rounded-lg p-4 border border-accent/20 text-center">
-              <div class="text-sm text-gray-500">Typical Negotiated Range</div>
-              <div class="text-xl font-bold text-accent" id="r-negotiated">€0</div>
-              <div class="text-xs text-gray-400">1.5x to 3x legal minimum</div>
-            </div>
+          <!-- Calculation detail -->
+          <div class="bg-gray-50 rounded-xl p-4 mb-4">
+            <h4 class="text-sm font-semibold text-dark mb-2">Calculation breakdown</h4>
+            <div id="r-breakdown" class="text-sm text-gray-600 space-y-1"></div>
           </div>
-          <p class="text-sm text-gray-600" id="r-detail"></p>
 
-          <div class="mt-4 bg-white rounded-lg p-4 border border-gray-100">
-            <h4 class="text-sm font-semibold text-dark mb-2">Key Dates & Deadlines</h4>
-            <div class="text-sm text-gray-600 space-y-1">
-              <p>→ <strong>Retraction period:</strong> 15 calendar days from signing</p>
-              <p>→ <strong>DREETS approval:</strong> 15 business days after retraction period</p>
-              <p>→ <strong>Employer social charge:</strong> 30% forfait social on amount exceeding legal severance</p>
+          <p class="text-sm text-gray-500" id="r-detail"></p>
+        </div>
+
+        <!-- Tax & social regime -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+          <h3 class="text-lg font-bold text-dark mb-4">Tax &amp; Social Regime</h3>
+          <div id="tax-regime-content"></div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+          <h3 class="text-lg font-bold text-dark mb-6">Timeline</h3>
+          <div id="timeline-content" class="relative">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <!-- Employer cost -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+          <h3 class="text-lg font-bold text-dark mb-4">Total Employer Cost</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+              <div class="text-sm text-gray-500 mb-1">Indemnity (legal min)</div>
+              <div class="text-xl font-bold text-dark" id="r-cost-indemnity">-</div>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+              <div class="text-sm text-gray-500 mb-1">Employer charge (30%)</div>
+              <div class="text-xl font-bold text-accent" id="r-cost-forfait">-</div>
+              <div class="text-xs text-gray-400 mt-1">on exempt portion</div>
+            </div>
+            <div class="bg-primary/10 rounded-xl p-4 text-center border border-primary/20">
+              <div class="text-sm text-gray-500 mb-1">Total employer cost</div>
+              <div class="text-xl font-bold text-primary" id="r-cost-total">-</div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Disclaimer -->
       <div class="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
         <div class="flex items-start gap-3">
           <svg class="w-6 h-6 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
           <div>
             <h4 class="font-bold text-amber-800 mb-1">Important Notice</h4>
             <p class="text-sm text-amber-700 leading-relaxed">
-              The indemnity shown is the <strong>legal minimum</strong>. Your collective bargaining agreement may require a higher amount. In practice, employees often negotiate above the legal floor. The forfait social (30%) applies to any amount exceeding the legal severance indemnity. <a href="/contact" class="underline font-semibold hover:text-amber-900">Contact our team</a> for negotiation strategy.
+              This calculator provides the <strong>legal minimum</strong> indemnity. Your collective bargaining agreement (<em>convention collective</em>) may require a higher amount. In practice, employees often negotiate above the legal floor. The 30% employer contribution applies to the portion exempt from social charges. For a complete analysis and negotiation strategy, <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
             </p>
           </div>
         </div>
       </div>
 
+      <!-- Legal references -->
       <div class="mt-8 prose prose-sm max-w-none text-gray-600">
         <h2 class="text-xl font-bold text-dark">How Does Rupture Conventionnelle Work?</h2>
-        <p>The <em>rupture conventionnelle</em> is a uniquely French mechanism allowing employer and employee to mutually agree to end the employment contract. Key rules:</p>
+        <p>The <em>rupture conventionnelle</em> (Articles L.1237-11 to L.1237-16, Code du travail) is a uniquely French mechanism allowing employer and employee to mutually agree to end a CDI employment contract.</p>
+
+        <h3 class="text-lg font-bold text-dark mt-6">Key Rules</h3>
         <ul>
-          <li>At least <strong>one preliminary meeting</strong> is required</li>
+          <li><strong>CDI only</strong> — CDD, interim, and apprenticeship contracts are not eligible</li>
+          <li>At least <strong>one preliminary meeting</strong> is required (art. L.1237-12)</li>
           <li>The employee may be assisted by a colleague or union representative</li>
-          <li>Both parties have a <strong>15 calendar-day retraction period</strong></li>
-          <li>The agreement must be <strong>approved by the DREETS</strong> (labour authority)</li>
+          <li>Both parties have a <strong>15 calendar-day retraction period</strong> from signing (art. L.1237-13)</li>
+          <li>The agreement must be <strong>approved (homologated) by the DREETS</strong> within 15 business days (art. L.1237-14)</li>
           <li>The minimum indemnity <strong>cannot be less than the legal severance pay</strong></li>
-          <li>The employee is entitled to <strong>unemployment benefits</strong></li>
+          <li>The employee is entitled to <strong>unemployment benefits</strong> (France Travail / ARE)</li>
+          <li>Contestation deadline: <strong>12 months</strong> before the labour court (<em>conseil de prud'hommes</em>)</li>
+        </ul>
+
+        <h3 class="text-lg font-bold text-dark mt-6">Indemnity Formula (art. R.1234-2)</h3>
+        <ul>
+          <li><strong>Years 1-10:</strong> 1/4 of monthly reference salary per year of service</li>
+          <li><strong>Years 11+:</strong> 1/3 of monthly reference salary per year of service</li>
+          <li>Incomplete years are prorated by month (e.g. 7 years 4 months = 7.333 years)</li>
+          <li>Minimum 8 months seniority required (art. L.1234-9)</li>
+        </ul>
+
+        <h3 class="text-lg font-bold text-dark mt-6">Reference Salary (art. R.1234-4)</h3>
+        <p>The most favourable of:</p>
+        <ul>
+          <li><strong>Method A:</strong> Average of the last 12 months gross salary</li>
+          <li><strong>Method B:</strong> 1/3 of the last 3 months gross salary (annual bonuses prorated at 1/12)</li>
+        </ul>
+
+        <h3 class="text-lg font-bold text-dark mt-6">Tax Regime (2026)</h3>
+        <ul>
+          <li><strong>If the employee cannot claim retirement:</strong> exempt from income tax up to the highest of: legal/conventional amount, 2x annual gross N-1, or 50% of indemnity — capped at 6 PASS (€288,360 in 2026)</li>
+          <li><strong>If the employee can claim retirement:</strong> fully taxable from the first euro</li>
+          <li><strong>Social charges exemption:</strong> same limits, capped at 2 PASS (€96,120 in 2026)</li>
+          <li><strong>30% employer contribution</strong> on the portion exempt from social charges (paid to CNAV)</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="section-padding bg-gray-50">
     <div class="container-narrow text-center">
       <h2 class="text-3xl font-bold text-dark mb-4">Planning a Mutual Termination?</h2>
-      <p class="text-gray-600 mb-8">Our experts can guide you through the entire process, from negotiation to DREETS approval.</p>
+      <p class="text-gray-600 mb-8">Our experts guide you through the entire process — from negotiation strategy to DREETS approval.</p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="/contact" class="btn-primary">Schedule a Consultation</a>
         <a href="/dairia-ai" class="btn-outline-primary">Try DAIRIA AI</a>
@@ -119,29 +376,364 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <script>
-  document.getElementById('rupture-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const salary = parseFloat((document.getElementById('salary') as HTMLInputElement).value) || 0;
-    const years = parseInt((document.getElementById('years') as HTMLInputElement).value) || 0;
-    const months = parseInt((document.getElementById('months') as HTMLInputElement).value) || 0;
+  const PASS_2026 = 48060;
+  const fmt = (n: number) => n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+  const fmtInt = (n: number) => n.toLocaleString('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
 
-    const totalYears = years + months / 12;
+  // --- Seniority calculation ---
+  function calcSeniority(start: Date, end: Date): { years: number; months: number; totalYears: number; totalMonths: number } {
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+    if (end.getDate() < start.getDate()) months--;
+    if (months < 0) { years--; months += 12; }
+    const totalMonths = years * 12 + months;
+    return { years, months, totalYears: years + months / 12, totalMonths };
+  }
 
-    // Same formula as legal severance: 1/4 per year ≤10, 1/3 per year >10
-    let indemnity = 0;
-    if (totalYears <= 10) {
-      indemnity = (salary / 4) * totalYears;
+  // --- Reference salary ---
+  function getAvg12(): number {
+    const inputs = document.querySelectorAll('.month-input') as NodeListOf<HTMLInputElement>;
+    let sum = 0, count = 0;
+    inputs.forEach(i => { const v = parseFloat(i.value) || 0; if (v > 0) { sum += v; count++; } });
+    return count > 0 ? sum / 12 : 0;
+  }
+
+  function getAvg3(): number {
+    const v1 = parseFloat((document.getElementById('m3-1') as HTMLInputElement).value) || 0;
+    const v2 = parseFloat((document.getElementById('m3-2') as HTMLInputElement).value) || 0;
+    const v3 = parseFloat((document.getElementById('m3-3') as HTMLInputElement).value) || 0;
+    const sum = v1 + v2 + v3;
+    return sum > 0 ? sum / 3 : 0;
+  }
+
+  // --- Update averages display ---
+  function updateAverages() {
+    const a12 = getAvg12();
+    const a3 = getAvg3();
+    (document.getElementById('avg-12') as HTMLElement).textContent = a12 > 0 ? fmt(a12) : '-';
+    (document.getElementById('avg-3') as HTMLElement).textContent = a3 > 0 ? fmt(a3) : '-';
+
+    const refSalary = Math.max(a12, a3);
+    const refDiv = document.getElementById('ref-salary-result')!;
+    if (refSalary > 0) {
+      refDiv.classList.remove('hidden');
+      (document.getElementById('ref-salary-value') as HTMLElement).textContent = fmt(refSalary);
+      const method = a12 >= a3 ? 'Method A (12-month average) — most favourable' : 'Method B (1/3 of last 3 months) — most favourable';
+      (document.getElementById('ref-salary-method') as HTMLElement).textContent = method;
     } else {
-      indemnity = (salary / 4) * 10 + (salary / 3) * (totalYears - 10);
+      refDiv.classList.add('hidden');
+    }
+  }
+
+  // --- Indemnity calculation (art. R.1234-2) ---
+  function calcIndemnity(refSalary: number, totalYears: number): { total: number; breakdown: string[] } {
+    const breakdown: string[] = [];
+    let total = 0;
+
+    if (totalYears <= 10) {
+      total = (refSalary / 4) * totalYears;
+      breakdown.push(`1/4 × ${fmt(refSalary)} × ${totalYears.toFixed(4)} years = ${fmt(total)}`);
+    } else {
+      const part1 = (refSalary / 4) * 10;
+      const part2 = (refSalary / 3) * (totalYears - 10);
+      total = part1 + part2;
+      breakdown.push(`Years 1-10: 1/4 × ${fmt(refSalary)} × 10 = ${fmt(part1)}`);
+      breakdown.push(`Years 11+: 1/3 × ${fmt(refSalary)} × ${(totalYears - 10).toFixed(4)} = ${fmt(part2)}`);
+      breakdown.push(`Total: ${fmt(total)}`);
     }
 
-    const fmt = (n: number) => `€${n.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+    return { total, breakdown };
+  }
+
+  // --- Tax regime ---
+  function calcTaxRegime(indemnity: number, annualRemun: number, canRetire: boolean): string {
+    if (canRetire) {
+      return `
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <p class="text-sm font-semibold text-red-800 mb-2">Employee eligible for retirement — unfavourable regime</p>
+          <ul class="text-sm text-red-700 space-y-1 list-disc list-inside">
+            <li>Indemnity is <strong>fully subject to income tax</strong> from the first euro</li>
+            <li>Indemnity is <strong>fully subject to social charges</strong> (cotisations + CSG/CRDS) from the first euro</li>
+            <li>No employer 30% contribution applies (no exempt portion)</li>
+          </ul>
+        </div>`;
+    }
+
+    const ceiling6PASS = 6 * PASS_2026; // 288,360
+    const ceiling2PASS = 2 * PASS_2026; // 96,120
+    const twice = annualRemun > 0 ? 2 * annualRemun : 0;
+    const half = indemnity / 2;
+
+    const irExemption = Math.min(Math.max(indemnity, twice, half), ceiling6PASS);
+    const ssExemption = Math.min(irExemption, ceiling2PASS);
+    const csgBase = Math.max(0, indemnity - ssExemption);
+    const forfait30 = ssExemption * 0.30;
+
+    return `
+      <div class="space-y-4">
+        <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+          <p class="text-sm font-semibold text-green-800 mb-2">Employee NOT eligible for retirement — favourable regime</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+            <div class="bg-white rounded-lg p-3 border border-green-100">
+              <div class="text-xs text-gray-500">Income tax exemption</div>
+              <div class="text-lg font-bold text-dark">${fmtInt(irExemption)}</div>
+              <div class="text-xs text-gray-400">max(legal, 2×N-1, 50% indemnity) capped at 6 PASS</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 border border-green-100">
+              <div class="text-xs text-gray-500">Social charges exemption</div>
+              <div class="text-lg font-bold text-dark">${fmtInt(ssExemption)}</div>
+              <div class="text-xs text-gray-400">same limit, capped at 2 PASS (${fmtInt(ceiling2PASS)})</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-4">
+          <p class="text-sm text-gray-600"><strong>30% employer contribution</strong> on exempt portion: ${fmtInt(ssExemption)} × 30% = <strong class="text-accent">${fmtInt(forfait30)}</strong></p>
+          ${csgBase > 0 ? `<p class="text-sm text-gray-600 mt-1"><strong>CSG/CRDS</strong> due on: ${fmtInt(csgBase)} (portion above social exemption)</p>` : '<p class="text-sm text-gray-600 mt-1">No CSG/CRDS due (indemnity within exemption ceiling)</p>'}
+        </div>
+      </div>`;
+  }
+
+  // --- Timeline ---
+  function calcTimeline(signingDate: Date | null): string {
+    if (!signingDate) {
+      return `
+        <div class="space-y-4 text-sm text-gray-600">
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-xs font-bold text-primary">1</span>
+            </div>
+            <div>
+              <p class="font-semibold text-dark">Preliminary meeting(s)</p>
+              <p class="text-gray-500">At least one meeting required. Employee may bring an assistant.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-xs font-bold text-primary">2</span>
+            </div>
+            <div>
+              <p class="font-semibold text-dark">Signing of the convention (CERFA or TeleRC)</p>
+              <p class="text-gray-500">Enter a signing date above for precise timeline dates.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-xs font-bold text-accent">3</span>
+            </div>
+            <div>
+              <p class="font-semibold text-dark">15 calendar days — retraction period</p>
+              <p class="text-gray-500">Either party may retract without reason by registered letter.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-xs font-bold text-accent">4</span>
+            </div>
+            <div>
+              <p class="font-semibold text-dark">15 business days — DREETS review</p>
+              <p class="text-gray-500">Silence = tacit approval (homologation). Starts after retraction period.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-xs font-bold text-green-700">5</span>
+            </div>
+            <div>
+              <p class="font-semibold text-dark">Contract ends</p>
+              <p class="text-gray-500">At the earliest, the day after homologation.</p>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // Calculate actual dates
+    const retractEnd = new Date(signingDate);
+    retractEnd.setDate(retractEnd.getDate() + 16); // day after signing + 15 days
+    // If falls on weekend/holiday, push to next business day
+    if (retractEnd.getDay() === 0) retractEnd.setDate(retractEnd.getDate() + 1);
+    if (retractEnd.getDay() === 6) retractEnd.setDate(retractEnd.getDate() + 2);
+
+    // DREETS: 15 business days after retraction
+    const dreetsStart = new Date(retractEnd);
+    dreetsStart.setDate(dreetsStart.getDate() + 1);
+    const dreetsEnd = new Date(dreetsStart);
+    let bizDays = 0;
+    while (bizDays < 15) {
+      dreetsEnd.setDate(dreetsEnd.getDate() + 1);
+      const dow = dreetsEnd.getDay();
+      if (dow !== 0 && dow !== 6) bizDays++;
+    }
+
+    const contractEnd = new Date(dreetsEnd);
+    contractEnd.setDate(contractEnd.getDate() + 1);
+
+    const dateFmt = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+
+    return `
+      <div class="space-y-4 text-sm">
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="text-xs font-bold text-primary">1</span>
+          </div>
+          <div>
+            <p class="font-semibold text-dark">Convention signed</p>
+            <p class="text-primary font-medium">${dateFmt(signingDate)}</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="text-xs font-bold text-accent">2</span>
+          </div>
+          <div>
+            <p class="font-semibold text-dark">End of retraction period (15 calendar days)</p>
+            <p class="text-accent font-medium">${dateFmt(retractEnd)}</p>
+            <p class="text-gray-500">Either party may retract by registered letter until this date.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="text-xs font-bold text-accent">3</span>
+          </div>
+          <div>
+            <p class="font-semibold text-dark">Submit to DREETS</p>
+            <p class="text-accent font-medium">${dateFmt(dreetsStart)}</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="text-xs font-bold text-accent">4</span>
+          </div>
+          <div>
+            <p class="font-semibold text-dark">DREETS review deadline (15 business days)</p>
+            <p class="text-accent font-medium">${dateFmt(dreetsEnd)}</p>
+            <p class="text-gray-500">Silence = tacit homologation.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="text-xs font-bold text-green-700">5</span>
+          </div>
+          <div>
+            <p class="font-semibold text-dark">Earliest contract termination date</p>
+            <p class="text-green-700 font-bold text-lg">${dateFmt(contractEnd)}</p>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // --- Event listeners ---
+  document.querySelectorAll('.month-input, .last3-input').forEach(el => {
+    el.addEventListener('input', updateAverages);
+  });
+
+  // Quick fill
+  document.getElementById('quick-fill-btn')?.addEventListener('click', () => {
+    const val = (document.getElementById('quick-salary') as HTMLInputElement).value;
+    if (!val) return;
+    document.querySelectorAll('.month-input').forEach(i => { (i as HTMLInputElement).value = val; });
+    document.querySelectorAll('.last3-input').forEach(i => { (i as HTMLInputElement).value = val; });
+    updateAverages();
+  });
+
+  document.getElementById('fill-all-btn')?.addEventListener('click', () => {
+    const first = (document.querySelector('.month-input') as HTMLInputElement).value;
+    if (!first) return;
+    document.querySelectorAll('.month-input').forEach(i => { (i as HTMLInputElement).value = first; });
+    updateAverages();
+  });
+
+  // Seniority auto-calc
+  function updateSeniority() {
+    const startVal = (document.getElementById('date-start') as HTMLInputElement).value;
+    const endVal = (document.getElementById('date-end') as HTMLInputElement).value;
+    if (!startVal || !endVal) { document.getElementById('seniority-display')!.classList.add('hidden'); return; }
+
+    const start = new Date(startVal);
+    const end = new Date(endVal);
+    if (end <= start) { document.getElementById('seniority-display')!.classList.add('hidden'); return; }
+
+    const s = calcSeniority(start, end);
+    document.getElementById('seniority-display')!.classList.remove('hidden');
+    (document.getElementById('seniority-text') as HTMLElement).textContent = `${s.years} year(s) and ${s.months} month(s)`;
+
+    if (s.totalMonths < 8) {
+      document.getElementById('seniority-warning')!.classList.remove('hidden');
+    } else {
+      document.getElementById('seniority-warning')!.classList.add('hidden');
+    }
+  }
+  document.getElementById('date-start')?.addEventListener('change', updateSeniority);
+  document.getElementById('date-end')?.addEventListener('change', updateSeniority);
+
+  // --- Main calculation ---
+  document.getElementById('calculate-btn')?.addEventListener('click', () => {
+    const startVal = (document.getElementById('date-start') as HTMLInputElement).value;
+    const endVal = (document.getElementById('date-end') as HTMLInputElement).value;
+
+    if (!startVal || !endVal) {
+      alert('Please enter the start and end dates of employment.');
+      return;
+    }
+
+    const start = new Date(startVal);
+    const end = new Date(endVal);
+    if (end <= start) { alert('End date must be after start date.'); return; }
+
+    const seniority = calcSeniority(start, end);
+
+    // Reference salary
+    const a12 = getAvg12();
+    const a3 = getAvg3();
+    const refSalary = Math.max(a12, a3);
+
+    if (refSalary <= 0) { alert('Please enter salary information (12 months, 3 months, or quick mode).'); return; }
+
+    const methodUsed = a12 >= a3 ? 'Method A (12-month average)' : 'Method B (1/3 of last 3 months)';
+
+    // Calculate indemnity
+    const { total: indemnity, breakdown } = calcIndemnity(refSalary, seniority.totalYears);
+
+    // Negotiated range
     const low = indemnity * 1.5;
     const high = indemnity * 3;
 
-    document.getElementById('r-legal')!.textContent = fmt(indemnity);
-    document.getElementById('r-negotiated')!.textContent = `${fmt(low)} — ${fmt(high)}`;
-    document.getElementById('r-detail')!.textContent = `Legal minimum based on ${years} year(s) and ${months} month(s) of service at €${salary.toLocaleString()}/month gross. In practice, most negotiations settle between 1.5x and 3x the legal floor depending on the context and bargaining power.`;
-    document.getElementById('result')!.classList.remove('hidden');
+    // Tax regime
+    const canRetire = (document.getElementById('retirement-eligible') as HTMLSelectElement).value === 'yes';
+    const annualRemun = parseFloat((document.getElementById('annual-remun') as HTMLInputElement).value) || refSalary * 12;
+
+    // Signing date for timeline
+    const signingVal = (document.getElementById('date-signing') as HTMLInputElement).value;
+    const signingDate = signingVal ? new Date(signingVal) : null;
+
+    // Employer cost
+    const ssExemption = canRetire ? 0 : Math.min(Math.min(Math.max(indemnity, 2 * annualRemun, indemnity / 2), 6 * PASS_2026), 2 * PASS_2026);
+    const forfait30 = ssExemption * 0.30;
+    const totalCost = indemnity + forfait30;
+
+    // --- Display results ---
+    document.getElementById('results')!.classList.remove('hidden');
+
+    document.getElementById('r-legal')!.textContent = fmtInt(indemnity);
+    document.getElementById('r-negotiated')!.textContent = `${fmtInt(low)} — ${fmtInt(high)}`;
+    document.getElementById('r-ref-salary')!.textContent = fmt(refSalary);
+    document.getElementById('r-ref-method')!.textContent = methodUsed;
+
+    document.getElementById('r-breakdown')!.innerHTML = breakdown.map(b =>
+      `<div class="flex justify-between"><span>${b}</span></div>`
+    ).join('');
+
+    document.getElementById('r-detail')!.textContent =
+      `Based on ${seniority.years} year(s) and ${seniority.months} month(s) of seniority (${seniority.totalYears.toFixed(4)} years) with a reference salary of ${fmt(refSalary)}/month.`;
+
+    document.getElementById('tax-regime-content')!.innerHTML = calcTaxRegime(indemnity, annualRemun, canRetire);
+
+    document.getElementById('timeline-content')!.innerHTML = calcTimeline(signingDate);
+
+    document.getElementById('r-cost-indemnity')!.textContent = fmtInt(indemnity);
+    document.getElementById('r-cost-forfait')!.textContent = fmtInt(forfait30);
+    document.getElementById('r-cost-total')!.textContent = fmtInt(totalCost);
+
+    // Scroll to results
+    document.getElementById('results')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 </script>
