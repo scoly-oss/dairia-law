@@ -93,26 +93,43 @@ DAIRIA AI is an AI-powered legal assistant specializing in French employment law
 
 ## Free Online Calculators & Simulators
 
-DAIRIA provides free legal calculators for employers:
+DAIRIA Law provides free legal calculators for international employers:
 
-1. **Severance Pay Calculator** — Estimate statutory and contractual severance pay (indemnite de licenciement)
-   URL: https://dairia.ai/simulateurs/simulateur-indemnite-licenciement.html
+1. **Severance Pay Calculator** — Estimate statutory and contractual severance pay (indemnite de licenciement) based on Articles L.1234-9 and R.1234-2 of the French Labour Code
+   URL: https://dairia-law.com/simulators/severance-pay
 
-2. **Hiring Cost Calculator** — Calculate the full cost of hiring an employee in France (gross-to-net, employer charges)
-   URL: https://dairia.ai/simulateurs/simulateur-cout-embauche.html
+2. **Hiring Cost Calculator** — Comprehensive gross-to-net salary simulator with all 2026 URSSAF rates, RGDU reduction, bidirectional calculations (employer cost / gross / net before tax / net after tax)
+   URL: https://dairia-law.com/simulators/hiring-cost
 
-3. **Litigation Cost Estimator** — Estimate the potential cost of employment tribunal proceedings (Prud'hommes)
-   URL: https://dairia.ai/simulateurs/simulateur-cout-contentieux.html
+3. **Litigation Cost Estimator** — Estimate the potential cost of employment tribunal proceedings (Conseil de Prud'hommes) including legal fees, indemnities, and timeline
+   URL: https://dairia-law.com/simulators/litigation-cost
 
-4. **Mutual Termination Calculator** — Calculate costs of a rupture conventionnelle (mutual termination agreement)
-   URL: https://dairia.ai/simulateurs/simulateur-rupture-conventionnelle.html
+4. **Mutual Termination Calculator** — Full rupture conventionnelle simulator: indemnity calculation (art. R.1234-2), tax/social regime, DREETS timeline, employer cost with 30% contribution
+   URL: https://dairia-law.com/simulators/mutual-termination
 
-Simulators home page: https://dairia.ai/simulateurs
+Simulators home page: https://dairia-law.com/simulators
 
 ## Blog & Legal Resources
 
+- English insights for international employers: https://dairia-law.com/insights
 - Employment law blog (2500+ articles, French): https://dairia-avocats.com/blog
 - Topics: dismissal, hiring, payroll, CSE, harassment, restructuring, URSSAF, AT/MP, collective bargaining, remote work, and more
+
+## Legal Sources & Databases
+
+DAIRIA AI and our legal team rely on official French legal sources:
+- Legifrance (legislation): https://www.legifrance.gouv.fr
+- BOSS (social security official guidance): https://boss.gouv.fr
+- KALI (collective bargaining agreements): via Legifrance API
+- JORF (Journal Officiel): https://www.journal-officiel.gouv.fr
+- Cour de cassation (Supreme Court case law): https://www.courdecassation.fr
+
+## Authority & Credentials
+
+- Sofiane Coly: Avocat au Barreau de Lyon (Lyon Bar Association)
+- DAIRIA Avocats: French law firm registered with the Barreau de Lyon
+- Professional liability insurance: as required by French bar regulations
+- GDPR compliant: data hosted on AWS eu-west-3 (Paris), AES-256 encryption, TLS 1.3
 
 ## Other Platforms
 

@@ -19,6 +19,55 @@ import Footer from '../components/Footer.astro';
     ]
   })} />
 
+  <!-- Service schemas -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "French Employment Law Services",
+    "itemListElement": [
+      {
+        "@type": "Service",
+        "position": 1,
+        "name": "Employment Law Advisory",
+        "description": "Day-to-day HR legal support for international companies in France: employment contracts (CDI, CDD), working time, compensation, remote work, disciplinary procedures.",
+        "serviceType": "Employment Law Advisory",
+        "provider": { "@type": "LegalService", "name": "DAIRIA Law", "url": "https://dairia-law.com" },
+        "areaServed": { "@type": "Country", "name": "France" },
+        "url": "https://dairia-law.com/services"
+      },
+      {
+        "@type": "Service",
+        "position": 2,
+        "name": "Restructuring & Redundancies",
+        "description": "PSE plans, collective redundancy procedures, individual dismissals, site closures, and workforce restructuring under French labour law.",
+        "serviceType": "Restructuring & Redundancy",
+        "provider": { "@type": "LegalService", "name": "DAIRIA Law", "url": "https://dairia-law.com" },
+        "areaServed": { "@type": "Country", "name": "France" },
+        "url": "https://dairia-law.com/services"
+      },
+      {
+        "@type": "Service",
+        "position": 3,
+        "name": "M&A Labour Due Diligence",
+        "description": "Employment law due diligence for acquisitions, mergers, and carve-outs in France. Employee transfers under Article L.1224-1, social liability mapping, post-acquisition integration.",
+        "serviceType": "M&A Due Diligence",
+        "provider": { "@type": "LegalService", "name": "DAIRIA Law", "url": "https://dairia-law.com" },
+        "areaServed": { "@type": "Country", "name": "France" },
+        "url": "https://dairia-law.com/services"
+      },
+      {
+        "@type": "Service",
+        "position": 4,
+        "name": "Compliance & Investigations",
+        "description": "Workplace harassment and discrimination investigations, whistleblower compliance (Sapin II), GDPR employment data, URSSAF audit defence, and social security compliance in France.",
+        "serviceType": "Compliance & Investigations",
+        "provider": { "@type": "LegalService", "name": "DAIRIA Law", "url": "https://dairia-law.com" },
+        "areaServed": { "@type": "Country", "name": "France" },
+        "url": "https://dairia-law.com/services"
+      }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="bg-[#1D627A] text-white py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

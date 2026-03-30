@@ -19,6 +19,91 @@ import Footer from '../components/Footer.astro';
     ]
   })} />
 
+  <!-- LocalBusiness + LegalService JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "DAIRIA Law",
+    "alternateName": "DAIRIA Avocats",
+    "url": "https://dairia-law.com",
+    "logo": "https://dairia-law.com/favicon.svg",
+    "image": "https://dairia-law.com/og-default.jpg",
+    "telephone": "+33672422486",
+    "email": "s.coly@dairia-avocats.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "65 rue Hénon",
+      "addressLocality": "Lyon",
+      "postalCode": "69004",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.7772,
+      "longitude": 4.8253
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "priceRange": "€€",
+    "areaServed": [
+      { "@type": "Country", "name": "France" },
+      { "@type": "Country", "name": "United States" },
+      { "@type": "Country", "name": "United Kingdom" },
+      { "@type": "Country", "name": "Germany" },
+      { "@type": "Country", "name": "China" },
+      { "@type": "Country", "name": "Japan" }
+    ],
+    "serviceType": ["Employment Law", "Labour Law", "Restructuring", "M&A Due Diligence", "Compliance"],
+    "knowsLanguage": ["en", "fr", "de", "zh", "ja", "es", "it"],
+    "founder": {
+      "@type": "Person",
+      "name": "Sofiane Coly",
+      "jobTitle": "Managing Partner — Avocat au Barreau de Lyon",
+      "url": "https://sofianecoly.com"
+    },
+    "sameAs": [
+      "https://dairia-avocats.com",
+      "https://dairia.ai",
+      "https://www.linkedin.com/company/dairia-avocats"
+    ]
+  })} />
+
+  <!-- FAQ JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What languages does DAIRIA Law support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our lawyers speak English and French fluently. Through DAIRIA AI, we also provide instant legal guidance in German, Chinese, Japanese, Spanish, Italian, and 6+ additional languages."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can I get legal advice on French employment law?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For urgent matters, DAIRIA AI provides instant answers 24/7. For complex issues requiring lawyer involvement, we typically respond within 24 hours on business days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you handle employment law matters across all of France?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. While our office is in Lyon, we represent international employers throughout France. French employment law is national, so our expertise applies regardless of your company's location in France."
+        }
+      }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="bg-[#1D627A] text-white py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

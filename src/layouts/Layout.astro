@@ -56,7 +56,15 @@ const ogLocale = localeMap[lang] || 'en_US';
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#1D627A" />
+    <meta name="author" content="DAIRIA Law — Sofiane Coly, Avocat au Barreau de Lyon" />
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="https://dairia-blog.bl-nk.io" />
+    <link rel="dns-prefetch" href="https://flagcdn.com" />
+    <link rel="preconnect" href="https://dairia-blog.bl-nk.io" crossorigin />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -83,6 +91,9 @@ const ogLocale = localeMap[lang] || 'en_US';
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+
+    <!-- Extra head content (JSON-LD, etc.) -->
+    <slot name="head" />
 
     <!-- Fonts: system stack (same as dairia-avocats.com) -->
   </head>
