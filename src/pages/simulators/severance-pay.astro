@@ -3,8 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Severance Pay Calculator — France | DAIRIA Law"
-  description="Free French severance pay calculator. Estimate legal indemnity (indemnité de licenciement) based on salary, seniority and applicable rules. Updated 2026."
+  title="Legal Severance Pay Calculator — France | DAIRIA Law"
+  description="Free French legal severance pay calculator (indemnité légale de licenciement). Statutory minimum based on articles L.1234-9 and R.1234-2. Does not include conventional (CCN) indemnity. Updated 2026."
   lang="en"
   canonicalPath="/simulators/severance-pay"
 >
@@ -16,10 +16,10 @@ import Layout from '../../layouts/Layout.astro';
         Back to Calculators
       </a>
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-        Severance Pay <span class="text-accent">Calculator</span>
+        Legal Severance Pay <span class="text-accent">Calculator</span>
       </h1>
       <p class="text-lg text-white/80 max-w-2xl">
-        Estimate the legal minimum severance indemnity (<em>indemnité légale de licenciement</em>) under French law. Based on articles L.1234-9 and R.1234-2 of the French Labour Code.
+        Estimate the <strong>statutory minimum</strong> severance indemnity (<em>indemnité légale de licenciement</em>) under French law, based on articles L.1234-9 and R.1234-2 of the French Labour Code. This does <strong>not</strong> calculate the conventional indemnity (<em>indemnité conventionnelle</em>), which may be higher depending on your applicable collective bargaining agreement.
       </p>
     </div>
   </section>
@@ -54,7 +54,7 @@ import Layout from '../../layouts/Layout.astro';
         </form>
 
         <div id="result" class="hidden mt-8 p-6 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border border-primary/10">
-          <h3 class="text-lg font-bold text-dark mb-4">Estimated Legal Severance Indemnity</h3>
+          <h3 class="text-lg font-bold text-dark mb-4">Estimated Legal Minimum Severance (<em>indemnité légale</em>)</h3>
           <div class="text-4xl font-bold text-primary mb-2" id="result-amount">€0</div>
           <p class="text-sm text-gray-600 mb-4" id="result-detail"></p>
           <div class="bg-white rounded-lg p-4 border border-gray-100">
@@ -70,20 +70,28 @@ import Layout from '../../layouts/Layout.astro';
           <div>
             <h4 class="font-bold text-amber-800 mb-1">Important Notice</h4>
             <p class="text-sm text-amber-700 leading-relaxed">
-              This calculator computes the <strong>legal minimum</strong> severance indemnity. Your applicable collective bargaining agreement (<em>convention collective</em>) may provide for a higher amount. Additionally, this does not include notice period pay (<em>indemnité compensatrice de préavis</em>) or accrued holiday pay. For a complete assessment, <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
+              This calculator computes the <strong>statutory legal minimum</strong> severance indemnity (<em>indemnité légale de licenciement</em>) only. It does <strong>not</strong> compute the <strong>conventional indemnity</strong> (<em>indemnité conventionnelle de licenciement</em>), which is set by your applicable collective bargaining agreement (<em>convention collective</em>) and is often more generous. French law requires the employer to pay whichever is higher. This calculator also excludes notice period pay (<em>indemnité compensatrice de préavis</em>) and accrued holiday pay. For a complete assessment including your CCN, <a href="/contact" class="underline font-semibold hover:text-amber-900">contact our team</a>.
             </p>
           </div>
         </div>
       </div>
 
       <div class="mt-8 prose prose-sm max-w-none text-gray-600">
-        <h2 class="text-xl font-bold text-dark">How is French Severance Pay Calculated?</h2>
-        <p>Under French law (articles L.1234-9 and R.1234-2 of the <em>Code du travail</em>), the legal severance indemnity is calculated as follows:</p>
+        <h2 class="text-xl font-bold text-dark">How is the Legal Severance Pay Calculated?</h2>
+        <p>Under French law (articles L.1234-9 and R.1234-2 of the <em>Code du travail</em>), the <strong>legal minimum</strong> severance indemnity (<em>indemnité légale</em>) is calculated as follows:</p>
         <ul>
           <li><strong>1/4 of monthly salary</strong> per year of service for the first 10 years</li>
           <li><strong>1/3 of monthly salary</strong> per year of service beyond 10 years</li>
         </ul>
         <p>The reference salary is the higher of: the average of the last 12 months, or 1/3 of the last 3 months (including prorated annual bonuses). A minimum of 8 months of seniority is required.</p>
+
+        <h2 class="text-xl font-bold text-dark mt-6">Legal vs. Conventional Severance: What's the Difference?</h2>
+        <p>French employment law provides two separate severance frameworks:</p>
+        <ul>
+          <li><strong>Legal indemnity (<em>indemnité légale</em>)</strong> — the statutory minimum set by the Labour Code, applicable to all employees. This is what this calculator computes.</li>
+          <li><strong>Conventional indemnity (<em>indemnité conventionnelle</em>)</strong> — a higher amount provided by many collective bargaining agreements (<em>conventions collectives</em>). The formula varies by industry and often provides significantly more generous terms (e.g. 1/3 per year from year 1, or special bonuses for long seniority).</li>
+        </ul>
+        <p>The employer must always pay <strong>whichever is higher</strong>. To determine your conventional indemnity, you need to identify the applicable CCN (by IDCC code). <a href="/contact" class="underline font-semibold hover:text-primary">Contact us</a> or use <a href="/dairia-ai" class="underline font-semibold hover:text-primary">DAIRIA AI</a> to find out which convention collective applies to your company.</p>
       </div>
     </div>
   </section>
